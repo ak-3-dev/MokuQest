@@ -23,6 +23,28 @@
   </head>
 
   <body>
+    <header>
+      <nav class="navbar navber-expand-lg navbar-dark shadow-sm" style="background-color: #3e2723;">
+        <div class="container">
+          <%= link_to "MokuQuest", root_path, class: "navbar-brand fw-bold", style: "color: #deff9a;" %>
+
+          <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ms=auto">
+              <li class="nav-item">
+                <%= link_to "About(ギルド案内)", about_path, class: "nav-link text-white" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "新規登録", "#", class: "btn btn-outline-warning btn-sm ms-lg-3 mt-1" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "ログイン", "#", class: "btn btn-warning btn-sm ms-lg-2 mt-1" %>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav
+    </header>
+
     <%= yield %>
   </body>
 </html>

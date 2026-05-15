@@ -8,3 +8,28 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+@import "bootstrap";
+
+body {
+  background-color: #f4ece1;
+  color: #3e2723;
+  font-family: "Sawarabi Mincho", serif;
+}
+
+.parchment {
+  background-color: #fff9f0;
+  border: 2px solid #8d6e63;
+  border-radius: 5px;
+  box-shadow: 3px 3px 10px rgba(0,0,0,0.2);
+  padding: 30px;
+  position: relative;
+}
+
+.btn-warning {
+  background-color: #d4a017;
+  border-color: #a67c00;
+  color: #fff;
+  &:hover {
+    background-color: #a67c00;
+  }
+}
