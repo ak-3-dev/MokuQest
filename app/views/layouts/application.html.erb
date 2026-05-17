@@ -10,41 +10,54 @@
 
     <%= yield :head %>
 
-    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
-    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
-
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Sawarabi+Mincho&display=swap" rel="stylesheet">
   </head>
 
   <body>
     <header>
-      <nav class="navbar navber-expand-lg navbar-dark shadow-sm" style="background-color: #3e2723;">
+      <nav class="navbar navbar-expand-lg navbar-dark shadow-sm py-3" style="background-color: #3e2723;">
         <div class="container">
-          <%= link_to "MokuQuest", root_path, class: "navbar-brand fw-bold", style: "color: #deff9a;" %>
+          <%= link_to "📜 モククエスト ⚔️", root_path, class: "navbar-brand fw-bold fs-3", style: "color: #deff9a;" %>
 
-          <div class="collapse navbar-collapse">
-            <ul class="navbar-nav ms=auto">
+          <div class="d-flex align-items-center">
+            <ul class="navbar-nav flex-row ms-auto align-items-center">
               <li class="nav-item">
-                <%= link_to "About(ギルド案内)", about_path, class: "nav-link text-white" %>
+                <%= link_to "ギルド案内所", about_path, class: "nav-link text-white px-3" %>
               </li>
-              <li class="nav-item">
-                <%= link_to "新規登録", "#", class: "btn btn-outline-warning btn-sm ms-lg-3 mt-1" %>
-              </li>
-              <li class="nav-item">
-                <%= link_to "ログイン", "#", class: "btn btn-warning btn-sm ms-lg-2 mt-1" %>
-              </li>
+              <% if user_signed_in? %>
+                <li class="nav-item text-white me-3">
+                  階級: 冒険者 (<%= current_user.email %>)
+                </li>
+                <li class="nav-item">
+                  <%= link_to "ギルド退館", destroy_user_session_path, class: "btn btn-outline-danger btn-sm mx-2" %>
+                </li>
+              <% else %>
+                <li class="nav-item">
+                  <%= link_to "冒険者登録", new_user_registration_path, class: "btn btn-outline-warning btn-sm mx-2" %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "ギルド入館", new_user_session_path, class: "btn btn-warning btn-sm mx-2" %>
+                </li>
+              <% end %>
             </ul>
           </div>
         </div>
-      </nav
+      </nav> 
     </header>
 
-    <%= yield %>
+    <main class="container my-5">
+      <%= yield %>
+    </main>
   </body>
 </html>

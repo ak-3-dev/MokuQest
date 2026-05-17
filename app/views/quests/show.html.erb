@@ -1,0 +1,14 @@
+<div class="container mt-5">
+  <div class="card shadow border-warning overflow-hidden">
+    <div class="card-header bg-warning text-dark py-3">
+      <h2 class="mb-0 fw-bold">📜 クエスト詳細: <%= @quest.title %></h2>
+    </div>
+    <div class="card-body p-4" style="background-color: #fafafa;">
+      <p class="lead" style="white-space: pre-wrap;"><%= @quest.body %></p>
+      <hr>
+      <div class="mt-4">
+        <%= link_to "掲示板に戻る", quests_path, class: "btn btn-secondary" %>
+      </div>
+    </div>
+  </div>
+</div>

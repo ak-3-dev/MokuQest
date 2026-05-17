@@ -11,25 +11,45 @@
 @import "bootstrap";
 
 body {
-  background-color: #f4ece1;
-  color: #3e2723;
-  font-family: "Sawarabi Mincho", serif;
+  background-color: #f4ece1 !important;
+  color: #3e2723 !important;
+  font-family: "Sawarabi Mincho", serif !important;
+}
+
+.guild-borad {
+  border: 3px double #5d4037 !important;
+  background-color: #fffaf0 !important;
+  padding: 20px;
+  border-radius: 8px;
 }
 
 .parchment {
   background-color: #fff9f0;
   border: 2px solid #8d6e63;
-  border-radius: 5px;
-  box-shadow: 3px 3px 10px rgba(0,0,0,0.2);
-  padding: 30px;
-  position: relative;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  padding: 40px;
+  margin-top: 20px;
 }
 
 .btn-warning {
-  background-color: #d4a017;
-  border-color: #a67c00;
-  color: #fff;
-  &:hover {
-    background-color: #a67c00;
-  }
+  background-color: #d4a017 !important;
+  border-color: #826000 !important;
+  color: #ffffff !important;
+}
+
+.btn-warning:hover {
+  background-color: #a67c00 !important;
+  border-color: #826000 !important;
+  color: #ffffff !important;
+}
+
+.btn-outline-warning {
+  color: #d4a017 !important;
+  border-color: #d4a017 !important;
+}
+
+.btn-outline-warning:hover {
+  background-color: #d4a017 !important;
+  color: #ffffff !important;
 }
