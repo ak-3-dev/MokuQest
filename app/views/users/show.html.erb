@@ -1,0 +1,50 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-4 mb-4">
+      <div class="card shadow border-dark text-center">
+        <div class="card-header bg-dark text-white py-3">
+          <h4 class="mb-0 fw-bold">🛡️ 冒険者ステータス</h4>
+        </div>
+        <div class="card-body py-4">
+          <div class="mb-3">
+            <span class="badge bg-warning text-dark fs-6 px-3 py-2 fw-bold">階級: 冒険者</span>
+          </div>
+          <h3 class="fw-bold mb-1" style="color: #3e2723;"><%= @user.name %></h3>
+          <p class="text-muted small mb-4"><%= @user.email %></p>
+          
+          <hr>
+          
+          <%= link_to "⚙️ 登録情報の編集・退会", edit_user_registration_path, class: "btn btn-outline-secondary w-100 fw-bold" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-8">
+      <h3 class="mb-4 fw-bold" style="color: #3e2723;">📜 あなたが受注したクエスト（<%= @quests.count %> 件）</h3>
+      
+      <% if @quests.any? %>
+        <div class="row">
+          <% @quests.each do |quest| %>
+            <div class="col-md-6 mb-3">
+              <div class="card h-100 shadow-sm border-warning" style="background-color: #fffde7;">
+                <div class="card-body d-flex flex-column justify-content-between">
+                  <div>
+                    <h5 class="card-title fw-bold"><%= quest.title %></h5>
+                    <p class="card-text text-muted small"><%= truncate(quest.body, length: 40) %></p>
+                  </div>
+                  <div class="text-end mt-2">
+                    <%= link_to "作戦確認", quest_path(quest), class: "btn btn-warning btn-sm fw-bold" %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <div class="card p-5 text-center shadow-sm border-dashed">
+          <p class="text-muted mb-0">まだ受注したクエストはありません。掲示板からクエストを受注しましょう！</p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,11 +1,18 @@
 class ApplicationController < ActionController::Base
-  # ログイン・新規登録など、deviseの機能が動く前に実行する
   before_action :configure_permitted_parameters, if: :devise_controller?
+
+  def after_sign_in_path_for(resource)
+    quests_path
+  end
+
+  def after_sign_out_path_for(resource)
+    new_user_registration_path
+  end
 
   protected
 
   def configure_permitted_parameters
-    # 新規登録（sign_up）の際に、nameカラムのデータも許可する
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:name])
   end
 end

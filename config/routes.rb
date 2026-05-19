@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   root to: "homes#top"
   get "about" => "homes#about", as: "about"
+  resources :users, only: [:show]
   resources :quests
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

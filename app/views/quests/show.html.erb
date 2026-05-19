@@ -6,8 +6,14 @@
     <div class="card-body p-4" style="background-color: #fafafa;">
       <p class="lead" style="white-space: pre-wrap;"><%= @quest.body %></p>
       <hr>
-      <div class="mt-4">
+      <div class="mt-4 d-flex gap-2">
         <%= link_to "掲示板に戻る", quests_path, class: "btn btn-secondary" %>
+
+        <% if @quest.user == current_user %>
+          <%= link_to "作戦変更", edit_quest_path(@quest), class: "btn btn-success" %>
+          <%= button_to "クエスト取消", quest_path(@quest), method: :delete, onclick: "return confirm('本当にこのクエストを取り消しますか？');", class: "btn btn-danger" %>
+
+        <% end %>
       </div>
     </div>
   </div>

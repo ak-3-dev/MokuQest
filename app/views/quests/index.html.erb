@@ -1,3 +1,14 @@
+<% if @quest.errors.any? %>
+  <div class="alert alert-danger">
+    <h5 class="fw-bold>"⚠️ <%= @quest.errors.count %> 件のエラーにより保存できませんでした:</h5>
+    <ul>
+      <% @quest.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <div class="container mt-4">
   <div class="row">
     <div class="col-md-4">

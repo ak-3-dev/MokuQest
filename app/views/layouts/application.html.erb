@@ -20,6 +20,8 @@
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+
+    <%= javascript_importmap_tags %>
     
     <link href="https://fonts.googleapis.com/css2?family=Sawarabi+Mincho&display=swap" rel="stylesheet">
   </head>
@@ -28,7 +30,7 @@
     <header>
       <nav class="navbar navbar-expand-lg navbar-dark shadow-sm py-3" style="background-color: #3e2723;">
         <div class="container">
-          <%= link_to "📜 モククエスト ⚔️", root_path, class: "navbar-brand fw-bold fs-3", style: "color: #deff9a;" %>
+          <%= link_to "📜 モククエスト ⚔️", quests_path, class: "navbar-brand fw-bold fs-3", style: "color: #deff9a;" %>
 
           <div class="d-flex align-items-center">
             <ul class="navbar-nav flex-row ms-auto align-items-center">
@@ -36,6 +38,9 @@
                 <%= link_to "ギルド案内所", about_path, class: "nav-link text-white px-3" %>
               </li>
               <% if user_signed_in? %>
+                <li class="nav-item">
+                  <%= link_to "🛡️ マイページ", user_path(current_user), class: "btn btn-outline-warning btn-sm mx-1 fw-bold" %>
+                </li>
                 <li class="nav-item text-white me-3">
                   階級: 冒険者 (<%= current_user.email %>)
                 </li>
