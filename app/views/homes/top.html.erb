@@ -1,15 +1,15 @@
 <div class="row justify-content-center">
-  <div class="col-md-9 parchment text-center py-5">
+  <div class="col-md-10 parchment text-center py-5">
     <h1 class="display-4 fw-bold mb-4">📜 モククエスト ⚔️</h1>
     
     <div class="fs-4 mb-5 lh-lg">
-      <p>日常に蔓延る「退屈なタスク」を、<br>
-         AIの魔導具によって「輝かしいクエスト」へ変換せよ。</p>
-      <p class="fs-6 text-muted">ー 黙々とこなす課題を、最高の冒険に ー</p>
+      <p>日常に溢れる「退屈なタスク」は、<br>
+         魔導の力で『英雄のクエスト』へと生まれ変わる</p>
+      <p class="fs-6 text-muted">ー 孤独な作業を、最高の冒険に ー</p>
     </div>
 
     <% if user_signed_in? %>
-      <%= link_to "冒険を続ける", root_path, class: "btn btn-success btn-lg" %>
+      <%= link_to "冒険を続ける", quests_path, class: "btn btn-success btn-lg" %>
     <% else %>
       <%= link_to "冒険者登録をしてギルドに入る", new_user_registration_path, class: "btn btn-warning btn-lg" %>
     <% end %>

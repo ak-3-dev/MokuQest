@@ -1,0 +1,268 @@
+/*
+ * This is a manifest file that'll be compiled into application.css.
+ *
+ * With Propshaft, assets are served efficiently without preprocessing steps. You can still include
+ * application-wide styles in this file, but keep in mind that CSS precedence will follow the standard
+ * cascading order, meaning styles declared later in the document or manifest will override earlier ones,
+ * depending on specificity.
+ *
+ * Consider organizing styles into separate files for maintainability.
+ */
+
+
+body::before{
+  content: "" !important;
+  position: fixed !important;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: -1 !important;
+  background-image: url("reai_94612s_TP_V.jpg") !important;
+  background-size: cover !important;
+  background-position: center !important;
+  filter: blur(2px) brightness(0.85) !important;
+}
+
+body {
+  background-color: transparent !important;
+  color: #3c2f2f;            
+  font-family: "Sawarabi Mincho", serif;
+}
+
+.bg-guild-navbar {
+  background-color: rgba(45,35,15,0.9) !important;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.5) !important;
+  border-bottom: 2px solid rgba(139, 100, 60, 0.5) !important;
+}
+
+.guild-borad {
+  border: 3px double #5d4037;
+  background-color: #fffaf0;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.parchment {
+  background-color: #fff9f0;
+  border: 2px solid #8d6e63;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  padding: 40px;
+  margin-top: 20px;
+}
+
+.btn-warning {
+  background-color: #d4a017;
+  border-color: #826000;
+  color: #ffffff;
+}
+
+.btn-warning:hover {
+  background-color: #a67c00;
+  border-color: #826000;
+  color: #ffffff;
+}
+
+.btn-outline-warning {
+  color: #d4a017;
+  border-color: #d4a017;
+}
+
+.btn-outline-warning:hover {
+  background-color: #d4a017;
+  color: #ffffff;
+}
+
+.parchment {
+  background-image: linear-gradient(rgba(244, 236, 216, 0.35), rgba(244, 236, 216, 0.35)), url("parchment.jpg") !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-color: transparent !important; 
+  border: none !important;
+
+  mask-image: radial-gradient(ellipse at center, black 50%, transparent 95%) !important;
+  -webkit-mask-image: radial-gradient(ellipse at center, black 70%, transparent 95%) !important; /* スマホやSafari用 */
+
+  box-shadow: inset 0 0 40px rgba(45, 25, 15, 0.3) !important;
+  border-radius: 0 !important;
+}
+
+.parchment h1, 
+.parchment p {
+  color: #1a0f05 !important;
+  text-shadow: 0 0 8px #f4ecd8, 1px 1px 1px #f4ecd8 !important;
+}
+
+.parchment .text-muted {
+  color: #5d4037 !important;
+  opacity: 0.8;
+}
+
+.card, .bg-light, .bg-white {
+  background-color: rgba(244, 236, 216, 0.88) !important; 
+  border: none !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(45, 25, 15, 0.15) !important;
+  border-radius: 10px !important;
+}
+
+.card, .card h1, .card h2, .card h3, .card h4, .card p, .card label, .card li,
+.bg-light, .bg-light h1, .bg-light p, .bg-light label {
+  color: #1a0f05 !important;
+}
+
+h2, .form-group label, .form-check-label {
+  color: #eedeb1 !important;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9) !important;
+}
+
+.form-control {
+  background-color: #ffffff !important;
+  border: 1px solid #5d4037 !important;
+  color: #000000 !important;
+}
+
+body:has(input[type="email"]) form, 
+body:has(input[name*="user"]) form,
+.new_user, 
+#new_user {
+  background-color: rgba(244, 236, 216, 0.94) !important;
+  max-width: 500px !important;
+  margin: 40px auto !important;
+  padding: 40px !important;
+  border-radius: 12px !important;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(45, 25, 15, 0.2) !important;
+}
+
+body:has(input[type="email"]) form label,
+.new_user label,
+#new_user label,
+.field, 
+.actions {
+  color: #1a0f05 !important;
+  font-weight: bold !important;
+  margin-top: 10px !important;
+  display: block !important; 
+}
+
+body:has(input[type="email"]) input[type="text"],
+body:has(input[type="email"]) input[type="email"],
+body:has(input[type="email"]) input[type="password"],
+.field input {
+  background-color: #ffffff !important;
+  border: 1px solid #5d4037 !important;
+  color: #000000 !important;
+  width: 100% !important; 
+  padding: 10px !important;
+  border-radius: 6px !important;
+  margin-top: 5px !important;
+  box-sizing: border-box !important; 
+}
+
+h2 {
+  color: #eedeb1 !important;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.9), 0 0 10px rgba(0, 0, 0, 0.5) !important;
+  font-weight: bold !important;
+  text-align: center !important;
+  margin-top: 40px !important;
+}
+
+input[type="submit"] {
+  background-color: #d4a017 !important;
+  border: 1px solid #826000 !important;
+  color: #ffffff !important;
+  padding: 10px 20px !important;
+  border-radius: 6px !important;
+  font-weight: bold !important;
+  width: 100% !important;
+  margin-top: 20px !important;
+  cursor: pointer !important;
+}
+input[type="submit"]:hover {
+  background-color: #a67c00 !important;
+}
+
+body:has(input[type="email"]) a,
+.new_user + a,
+#new_user ~ a {
+  display: block !important;
+  text-align: center !important;
+  color: #eedeb1 !important;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8) !important;
+  font-weight: bold !important;
+  margin-top: 15px !important;
+}
+
+.parchment .btn-warning,
+.parchment a[href*="sign_up"],
+.parchment a:last-of-type {
+  color: #2b1a08 !important;
+  font-weight: bold !important;
+  text-shadow: 0 0 8px #ffffff, 0 0 15px #ffffff, 1px 1px 1px #ffffff !important;
+  border-color: #8c633d !important;
+}
+
+.parchment .btn-warning:hover,
+.parchment a:last-of-type:hover {
+  color: #ffffff !important;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8) !important;
+}
+
+.card {
+  background-color: rgba(244, 236, 216, 0.94) !important; 
+  border: none !important;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5) !important;
+  border-radius: 12px !important;
+  overflow: hidden !important; 
+}
+
+.card-header {
+  background-color: rgba(53, 1, 1, 0.9) !important; 
+  border: none !important;
+  border-bottom: none !important; 
+  box-shadow: none !important;
+}
+
+.card-header,
+.card-header div,
+.card-header h1,
+.card-header h2,
+.card-header h3,
+.card-header h4,
+.card-header h5,
+.card-header h6,
+.card-header p,
+.card-header span {
+  color: #ffcc00 !important;
+  font-weight: bold !important;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8) !important;
+}
+  
+.card-body {
+  background-color: transparent !important;
+  margin-top: -1px !important; 
+  border: none !important;
+  color: #2b1a08 !important; 
+  font-size: 1.15rem !important;
+  padding: 35px 30px !important;
+}
+
+.card-footer {
+  background-color: rgba(45, 35, 15, 0.03) !important;
+  border-top: 1px solid rgba(141, 110, 99, 0.2) !important;
+  padding: 20px 30px !important;
+}
+
+.btn-outline-secondary {
+  color: #5d4037 !important;
+  border-color: #a1887f !important;
+  background-color: transparent !important;
+}
+.btn-outline-secondary:hover {
+  background-color: #5d4037 !important;
+  color: #ffffff !important;
+}
+
+.btn-success, .btn-warning {
+  background-color: #d4a017 !important;
+  border-color: #b8860b !important;
+  color: #ffffff !important;
+  font-weight: bold !important;
+}
