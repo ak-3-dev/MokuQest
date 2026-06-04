@@ -1,0 +1,19 @@
+current directory: /home/ubuntu/environment/MokuQuest/vendor/bundle/ruby/3.3.0/gems/erb-6.0.4/ext/erb/escape
+/home/ubuntu/.rbenv/versions/3.3.6/bin/ruby extconf.rb
+checking for rb_ext_ractor_safe() in ruby.h... yes
+creating Makefile
+
+current directory: /home/ubuntu/environment/MokuQuest/vendor/bundle/ruby/3.3.0/gems/erb-6.0.4/ext/erb/escape
+make DESTDIR\= sitearchdir\=./.gem.20260604-8250-mun7ie sitelibdir\=./.gem.20260604-8250-mun7ie clean
+
+current directory: /home/ubuntu/environment/MokuQuest/vendor/bundle/ruby/3.3.0/gems/erb-6.0.4/ext/erb/escape
+make DESTDIR\= sitearchdir\=./.gem.20260604-8250-mun7ie sitelibdir\=./.gem.20260604-8250-mun7ie
+compiling escape.c
+linking shared-object erb/escape.so
+
+current directory: /home/ubuntu/environment/MokuQuest/vendor/bundle/ruby/3.3.0/gems/erb-6.0.4/ext/erb/escape
+make DESTDIR\= sitearchdir\=./.gem.20260604-8250-mun7ie sitelibdir\=./.gem.20260604-8250-mun7ie install
+/usr/bin/install -c -m 0755 escape.so ./.gem.20260604-8250-mun7ie/erb
+
+current directory: /home/ubuntu/environment/MokuQuest/vendor/bundle/ruby/3.3.0/gems/erb-6.0.4/ext/erb/escape
+make DESTDIR\= sitearchdir\=./.gem.20260604-8250-mun7ie sitelibdir\=./.gem.20260604-8250-mun7ie clean

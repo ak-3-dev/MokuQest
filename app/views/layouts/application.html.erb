@@ -28,7 +28,7 @@
     <header>
       <nav class="navbar navbar-expand-lg navbar-dark shadow-sm py-3 bg-guild-navbar">
         <div class="container">
-          <%= link_to "📜 モククエスト ⚔️", quests_path, class: "navbar-brand fw-bold fs-3", style: "color: #deff9a;" %>
+          <%= link_to "📜 モククエスト ⚔️", root_path, class: "navbar-brand fw-bold fs-3", style: "color: #deff9a;" %>
 
           <div class="d-flex align-items-center">
             <ul class="navbar-nav flex-row ms-auto align-items-center">
@@ -38,6 +38,11 @@
               <% if user_signed_in? %>
                 <li class="nav-item">
                   <%= link_to "🛡️ マイページ", user_path(current_user), class: "btn btn-outline-warning btn-sm mx-1 fw-bold" %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "クエスト受注", new_quest_path, class: "btn btn-outline-warning btn-sm mx-1 fw-bold" %>
+                </li><li class="nav-item">
+                  <%= link_to "クエスト一覧", quests_path, class: "btn btn-outline-warning btn-sm mx-1 fw-bold" %>
                 </li>
                 <li class="nav-item text-white me-3">
                   階級: 冒険者 (<%= current_user.name %>)

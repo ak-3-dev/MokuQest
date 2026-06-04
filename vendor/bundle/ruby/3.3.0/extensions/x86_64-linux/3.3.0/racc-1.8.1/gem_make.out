@@ -1,0 +1,18 @@
+current directory: /home/ubuntu/environment/MokuQuest/vendor/bundle/ruby/3.3.0/gems/racc-1.8.1/ext/racc/cparse
+/home/ubuntu/.rbenv/versions/3.3.6/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /home/ubuntu/environment/MokuQuest/vendor/bundle/ruby/3.3.0/gems/racc-1.8.1/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20260604-8250-rvh5mf sitelibdir\=./.gem.20260604-8250-rvh5mf clean
+
+current directory: /home/ubuntu/environment/MokuQuest/vendor/bundle/ruby/3.3.0/gems/racc-1.8.1/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20260604-8250-rvh5mf sitelibdir\=./.gem.20260604-8250-rvh5mf
+compiling cparse.c
+linking shared-object racc/cparse.so
+
+current directory: /home/ubuntu/environment/MokuQuest/vendor/bundle/ruby/3.3.0/gems/racc-1.8.1/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20260604-8250-rvh5mf sitelibdir\=./.gem.20260604-8250-rvh5mf install
+/usr/bin/install -c -m 0755 cparse.so ./.gem.20260604-8250-rvh5mf/racc
+
+current directory: /home/ubuntu/environment/MokuQuest/vendor/bundle/ruby/3.3.0/gems/racc-1.8.1/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20260604-8250-rvh5mf sitelibdir\=./.gem.20260604-8250-rvh5mf clean

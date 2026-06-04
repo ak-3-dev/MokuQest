@@ -1,0 +1,19 @@
+current directory: /home/ubuntu/environment/MokuQuest/vendor/bundle/ruby/3.3.0/gems/debug-1.11.1/ext/debug
+/home/ubuntu/.rbenv/versions/3.3.6/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /home/ubuntu/environment/MokuQuest/vendor/bundle/ruby/3.3.0/gems/debug-1.11.1/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20260604-8250-2dnxe sitelibdir\=./.gem.20260604-8250-2dnxe clean
+
+current directory: /home/ubuntu/environment/MokuQuest/vendor/bundle/ruby/3.3.0/gems/debug-1.11.1/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20260604-8250-2dnxe sitelibdir\=./.gem.20260604-8250-2dnxe
+compiling debug.c
+compiling iseq_collector.c
+linking shared-object debug/debug.so
+
+current directory: /home/ubuntu/environment/MokuQuest/vendor/bundle/ruby/3.3.0/gems/debug-1.11.1/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20260604-8250-2dnxe sitelibdir\=./.gem.20260604-8250-2dnxe install
+/usr/bin/install -c -m 0755 debug.so ./.gem.20260604-8250-2dnxe/debug
+
+current directory: /home/ubuntu/environment/MokuQuest/vendor/bundle/ruby/3.3.0/gems/debug-1.11.1/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20260604-8250-2dnxe sitelibdir\=./.gem.20260604-8250-2dnxe clean

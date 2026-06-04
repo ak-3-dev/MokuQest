@@ -4,6 +4,9 @@ class QuestsController < ApplicationController
 
   def index
     @quests = Quest.all.order(created_at: :desc)
+  end
+
+  def new
     @quest = Quest.new
   end
 
