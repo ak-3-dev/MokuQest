@@ -1,7 +1,15 @@
 <div class="container mt-5">
   <div class="card shadow border-warning overflow-hidden">
-    <div class="card-header bg-warning text-dark py-3">
-      <h2 class="mb-0 fw-bold">📜 クエスト詳細: <%= @quest.title %></h2>
+    <div class="card-header py-3 d-flex justify-content-between align-items-center flex-wrap gap-2">
+      <h2 class="mb-0 fw-bold text-white">📜 クエスト詳細: <%= @quest.title %></h2>
+
+      <div class="fs-5">
+        <span class="fw-bold" style="color: #ffc107 !important;">依頼主:</span>
+    
+        <%= link_to user_path(@quest.user), class: "fw-bold text-decoration-none", style: "color: #ffc107 !important;" do %>
+          👤 <%= @quest.user.name %>
+        <% end %>
+      </div>
     </div>
     <div class="card-body p-4" style="background-color: #fafafa;">
       <p class="lead" style="white-space: pre-wrap;"><%= @quest.body %></p>
@@ -18,3 +26,4 @@
     </div>
   </div>
 </div>
+

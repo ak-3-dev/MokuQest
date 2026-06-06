@@ -14,26 +14,32 @@
           
           <hr>
           
-          <%= link_to "⚙️ 登録情報の編集・退会", edit_user_registration_path, class: "btn btn-outline-secondary w-100 fw-bold" %>
+          <% if @user == current_user %>
+            <%= link_to "⚙️ 登録情報の編集・退会", edit_user_registration_path, class: "btn btn-outline-secondary w-100 fw-bold" %>
+          <% else %>
+            <%= link_to "🏠 自分のマイページに戻る", user_path(current_user), class: "btn btn-primary w-100 fw-bold" %>
+          <% end %>
         </div>
       </div>
     </div>
 
     <div class="col-md-8">
-      <h3 class="mb-4 fw-bold" style="color: #3e2723;">📜 あなたが受注したクエスト（<%= @quests.count %> 件）</h3>
+     <h2 class="fw-bold fs-3 text-center" style="color: #3e2723; display: table; margin: 0 auto 24px; border-bottom: 3px solid #ffc107; padding-bottom: 10px;">
+        📜 あなたのAI生成クエスト（<%= @quests.count %> 件）
+     </h2>
       
-      <% if @quests.any? %>
+     <% if @quests.any? %>
         <div class="row">
           <% @quests.each do |quest| %>
-            <div class="col-md-6 mb-3">
-              <div class="card h-100 shadow-sm border-warning" style="background-color: #fffde7;">
-                <div class="card-body d-flex flex-column justify-content-between">
-                  <div>
-                    <h5 class="card-title fw-bold"><%= quest.title %></h5>
-                    <p class="card-text text-muted small"><%= truncate(quest.body, length: 40) %></p>
+            <div class="col-12 mb-3">
+              <div class="card shadow-sm border-warning" style="background-color: #fffde7;">
+                <div class="card-body d-flex align-items-center justify-content-between py-3">
+                  <div style="flex: 1; min-width: 0;" class="pe-3">
+                    <h5 class="card-title fw-bold text-truncate mb-1"><%= quest.title %></h5>
+                    <p class="card-text text-muted small mb-0 text-truncate"><%= quest.body %></p>
                   </div>
-                  <div class="text-end mt-2">
-                    <%= link_to "作戦確認", quest_path(quest), class: "btn btn-warning btn-sm fw-bold" %>
+                  <div class="text-end" style="flex-shrink: 0;">
+                    <%= link_to "作戦確認", quest_path(quest), class: "btn btn-warning btn-sm fw-bold px-3" %>
                   </div>
                 </div>
               </div>
@@ -42,7 +48,7 @@
         </div>
       <% else %>
         <div class="card p-5 text-center shadow-sm border-dashed">
-          <p class="text-muted mb-0">まだ受注したクエストはありません。掲示板からクエストを受注しましょう！</p>
+          <p class="text-muted mb-0">まだ受注したクエストはありません。目標を設定してクエストを受注しましょう！</p>
         </div>
       <% end %>
     </div>

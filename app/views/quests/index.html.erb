@@ -1,52 +1,42 @@
-<% if @quest.errors.any? %>
-  <div class="alert alert-danger">
-    <h5 class="fw-bold>"⚠️ <%= @quest.errors.count %> 件のエラーにより保存できませんでした:</h5>
-    <ul>
-      <% @quest.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
+<div class="container mt-5">
+  <div class="text-center mb-5">
+    <h2 class="fw-bold" style="color: #3e2723; display: inline-block; border-bottom: 3px solid #ffc107; padding-bottom: 10px;">
+      ⚔️ 現在のクエスト一覧（ギルド掲示板）
+    </h2>
   </div>
-<% end %>
 
-<div class="container mt-4">
-  <div class="row">
-    <div class="col-md-4">
-      <div class="card shadow-sm border-warning mb-4" style="background-color: #fff9c4;">
-        <div class="card-body">
-          <h4 class="card-title text-brown fw-bold">📜 新規クエスト受注</h4>
-          <%= form_with model: @quest do |f| %>
-            <div class="mb-3">
-              <%= f.label :title, "クエスト名（目標）", class: "form-label fw-bold" %>
-              <%= f.text_field :title, class: "form-control", placeholder: "例：Rubyを極める" %>
-            </div>
-            <div class="mb-3">
-              <%= f.label :body, "詳細内容", class: "form-label fw-bold" %>
-              <%= f.text_area :body, class: "form-control", rows: 4, placeholder: "何を達成するか詳しく書こう" %>
-            </div>
-            <%= f.submit "クエストを受注する", class: "btn btn-warning w-100 fw-bold shadow-sm" %>
-          <% end %>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-8">
-      <h2 class="mb-4 fw-bold" style="color: #3e2723;">⚔️ 現在のクエスト一覧</h2>
-      <div class="row">
+  <div class="row justify-content-center">
+    <div class="col-md-9">
+      <% if @quests.any? %>
         <% @quests.each do |quest| %>
-          <div class="col-md-6 mb-3">
-            <div class="card h-100 shadow-sm border-secondary">
-              <div class="card-body">
-                <h5 class="card-title fw-bold"><%= quest.title %></h5>
-                <p class="card-text text-muted small"><%= truncate(quest.body, length: 50) %></p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <span class="badge bg-info text-dark">冒険者: <%= quest.user.name %></span> <%= link_to "詳細を見る", quest_path(quest), class: "btn btn-outline-primary btn-sm" %>
+          <div class="card shadow-sm border-secondary mb-3">
+            <div class="card-body d-flex align-items-center justify-content-between flex-wrap gap-3">
+              
+              <div style="flex: 1; min-width: 250px;">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                  <h5 class="card-title fw-bold text-dark mb-0"><%= quest.title %></h5>
+                  <span class="badge bg-info text-dark">
+                    👤 <%= quest.user.name %>
+                  </span>
                 </div>
+                <p class="card-text text-muted small mb-0">
+                  <%= truncate(quest.body, length: 80) %>
+                </p>
               </div>
+              
+              <div class="text-end">
+                <%= link_to "詳細を見る", quest_path(quest), class: "btn btn-outline-primary fw-bold" %>
+              </div>
+
             </div>
           </div>
         <% end %>
-      </div>
+      <% else %>
+        <div class="text-center py-5">
+          <p class="text-muted fs-5">現在受注されているクエストはありません。</p>
+          <%= link_to "クエストを受注する", new_quest_path, class: "btn btn-warning fw-bold mt-2" %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

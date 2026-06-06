@@ -1,1 +1,35 @@
-クエスト受注画面
+<% if @quest.errors.any? %>
+  <div class="alert alert-danger container mt-4">
+    <h5 class="fw-bold">⚠️ <%= @quest.errors.count %> 件のエラーにより保存できませんでした:</h5>
+    <ul>
+      <% @quest.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow border-warning">
+        <div class="card-header bg-warning text-dark py-3">
+          <h3 class="mb-0 fw-bold">📜 新規クエスト受注</h3>
+        </div>
+        <div class="card-body p-4">
+          <%= form_with model: @quest, local: true do |f| %>
+            <div class="mb-3">
+              <%= f.label :title, "クエスト名（目標）", class: "form-label fw-bold" %>
+              <%= f.text_field :title, class: "form-control", placeholder: "例：Rubyを極める" %>
+            </div>
+            <div class="mb-3">
+              <%= f.label :body, "詳細内容", class: "form-label fw-bold" %>
+              <%= f.text_area :body, class: "form-control", rows: 6, placeholder: "何を達成するか詳しく書こう" %>
+            </div>
+            <%= f.submit "クエストを受注する", class: "btn btn-warning w-100 fw-bold shadow-sm" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
