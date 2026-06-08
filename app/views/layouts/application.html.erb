@@ -64,6 +64,15 @@
       </nav> 
     </header>
 
+    <% if user_signed_in? %>
+      <%= form_with url: search_path, method: :get, class: "search-form" do |f| %>
+        <%= f.text_field :keyword, placeholder: "検索ワードを入力" %>
+        <%= f.select :range, options_for_select([["ユーザー", "user"], ["クエスト", "quest"]]) %>
+        <%= f.select :search_method, options_for_select([["完全一致", "perfect"], ["部分一致", "partial"]]) %>
+        <%= f.submit "検索" %>
+      <% end %>
+    <% end %> 
+
     <main class="container my-5">
       <%= yield %>
     </main>

@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
+  get "searches/search"
   devise_for :users, controllers: {
     registrations: "users/registrations"
   }
   root to: "homes#top"
   get "about" => "homes#about", as: "about"
+  get "search" => "searches#search", as: "search"
   resources :users, only: [:show]
   resources :quests
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
