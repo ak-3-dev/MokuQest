@@ -1,7 +1,37 @@
-<h1>冒険者詳細</h1>
+<div class="container my-5">
+  <div class="card text-light p-4 guild-admin-card">
+    
+    <div class="card-header bg-transparent text-center guild-card-header">
+      <h2 class="font-weight-bold guild-title">
+        冒険者詳細（管理用）
+      </h2>
+    </div>
 
-<p>ユーザーID: <%= @user.id %></p>
-<p>名前: <%= @user.name %></p>
-<p>メールアドレス: <%= @user.email %></p>
+    <div class="card-body">
+      <table class="table table-dark table-striped table-bordered border-secondary my-4">
+        <tbody>
+          <tr>
+            <th class="guild-table-th">ユーザーID</th>
+            <td><%= @user.id %></td>
+          </tr>
+          <tr>
+            <th class="guild-table-th">名前</th>
+            <td><%= @user.name %></td>
+          </tr>
+          <tr>
+            <th class="guild-table-th">メールアドレス</th>
+            <td><%= @user.email %></td>
+          </tr>
+        </tbody>
+      </table>
 
-<%= button_to "退会", admin_user_path(@user), method: :delete, data: { confirm: "本当に退会させますか？" } %>
+      <div class="text-center mt-5 d-flex justify-content-center gap-3">
+        <%= link_to "ギルドの冒険者一覧へ戻る", admin_users_path, class: "btn btn-outline-light px-4 mx-2" %>
+        <%= link_to "退会させる", admin_user_path(@user), 
+                    data: { turbo_method: :delete, turbo_confirm: "本当に退会させますか？" }, 
+                    class: "btn btn-danger px-4 mx-2" %>
+      </div>
+
+    </div>
+  </div>
+</div>
