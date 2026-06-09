@@ -1,0 +1,7 @@
+<h1>冒険者詳細</h1>
+
+<p>ユーザーID: <%= @user.id %></p>
+<p>名前: <%= @user.name %></p>
+<p>メールアドレス: <%= @user.email %></p>
+
+<%= button_to "退会", admin_user_path(@user), method: :delete, data: { confirm: "本当に退会させますか？" } %>

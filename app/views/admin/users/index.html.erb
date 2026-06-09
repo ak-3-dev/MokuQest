@@ -1,0 +1,21 @@
+<h1 class="admin-title">冒険者ギルド・所属ユーザー一覧</h1>
+<div class="title-line"></div>
+
+<table class="admin-table">
+  <thead>
+    <tr>
+      <th>ユーザーID</th>
+      <th>名前</th>
+      <th>詳細</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.id %></td>
+        <td><%= user.name %></td>
+        <td><%= link_to "詳細", admin_user_path(user), class: "admin-link" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

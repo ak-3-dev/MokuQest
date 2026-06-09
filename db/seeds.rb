@@ -11,6 +11,7 @@ puts "『MokuQuest』の世界に聖なるシードデータを流し込みま�
 
 Quest.delete_all
 User.delete_all
+Admin.delete_all
 
 me = User.create!(
   name: "新米冒険者",
@@ -51,5 +52,11 @@ companion2.quests.create!([
   { title: "Git/GitHubでのブランチ運用", body: "AI生成クエスト[チーム開発]: 新しいトピックブランチを作成し、競合（コンフリクト）を起こさずにプルリクエストを送信・マージする。" }
 ])
 puts "📜 タイムライン用のクエストデータを配置しました。"
+
+Admin.find_or_create_by!(email: "admin@example.com") do |admin|
+  admin.password = "password"
+  admin.password_confirmation = "password" 
+end
+puts "👑 ギルドマスター（管理者）を作成しました（email: admin@example.com）"
 
 puts "✨ すべての検証用データの投入が完了しました！"

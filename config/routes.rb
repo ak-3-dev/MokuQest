@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  devise_for :admins, path: :admin
+  namespace :admin do
+    resources :users, only: [:index, :show, :destroy]
+  end
   get "searches/search"
   devise_for :users, controllers: {
     registrations: "users/registrations"
