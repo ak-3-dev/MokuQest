@@ -294,3 +294,35 @@ body:has(input[type="email"]) a,
 .search-form input[type="submit"]:hover {
   background: #f0f0f0 !important;
 }
+
+.comment-form-container {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  width: 100% !important;
+}
+
+.comment-textarea {
+  width: 100% !important;
+  height: auto !important;
+}
+
+input[type="submit"].custom-submit-btn {
+  background-color: #ffffff !important;
+  color: #333333 !important;
+  border: 1px solid #cccccc !important;
+  width: auto !important;
+  padding: 4px 16px !important;
+  font-size: 14px !important;
+  font-weight: bold !important;
+  border-radius: 4px !important;
+  height: 32px !important;
+  margin-top: 4px !important;
+  display: inline-block !important;
+  cursor: pointer; 
+  transition: background-color 0.2s ease; 
+}
+
+input[type="submit"].custom-submit-btn:hover {
+  background-color: #e6e6e6 !important; 
+}

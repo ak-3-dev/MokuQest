@@ -6,10 +6,28 @@
           <h4 class="mb-0 fw-bold">🛡️ 冒険者ステータス</h4>
         </div>
         <div class="card-body py-4">
-          <div class="mb-3">
-            <span class="badge bg-warning text-dark fs-6 px-3 py-2 fw-bold">階級: 冒険者</span>
-          </div>
-          <h3 class="fw-bold mb-1" style="color: #3e2723;"><%= @user.name %></h3>
+          
+          <div class="mb-4 text-start d-inline-block" style="min-width: 180px;">
+            <div class="d-flex align-items-center mb-2">
+              <span class="badge bg-warning text-dark me-2 fw-bold" style="width: 100px;">階級</span>
+              <span class="fw-bold text-dark">冒険者</span>
+            </div>
+            
+            <div class="d-flex align-items-center mb-2">
+              <span class="badge bg-secondary text-white me-2 fw-bold" style="width: 100px;">作成クエスト</span>
+              <span class="fw-bold text-dark"><%= @user.quests.count %> 件</span>
+            </div>
+
+            <%# <div class="d-flex align-items-center mb-2"> %>
+              <%# <span class="badge bg-success text-white me-2 fw-bold" style="width: 100px;">完了クエスト</span> %>
+              <%# <span class="fw-bold text-dark"><%= @user.quests.where(is_completed: true).count %> <%# 件</span> %>
+            <%# </div> %>
+
+            <div class="d-flex align-items-center">
+              <span class="badge bg-secondary text-white me-2 fw-bold" style="width: 100px;">コメント数</span>
+              <span class="fw-bold text-dark"><%= Comment.where(quest_id: @user.quests.pluck(:id)).count %> 回</span>
+            </div>
+          </div> <h3 class="fw-bold mb-1" style="color: #3e2723;"><%= @user.name %></h3>
           <p class="text-muted small mb-4"><%= @user.email %></p>
           
           <hr>
@@ -25,7 +43,7 @@
 
     <div class="col-md-8">
      <h2 class="fw-bold fs-3 text-center" style="color: #3e2723; display: table; margin: 0 auto 24px; border-bottom: 3px solid #ffc107; padding-bottom: 10px;">
-        📜 あなたのAI生成クエスト（<%= @quests.count %> 件）
+        📜 冒険者のクエスト（<%= @quests.count %> 件）
      </h2>
       
      <% if @quests.any? %>

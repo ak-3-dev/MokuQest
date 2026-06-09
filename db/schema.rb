@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_05_17_143137) do
+ActiveRecord::Schema[8.0].define(version: 2026_06_08_230758) do
+  create_table "comments", force: :cascade do |t|
+    t.text "comment"
+    t.integer "user_id", null: false
+    t.integer "quest_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["quest_id"], name: "index_comments_on_quest_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
   create_table "quests", force: :cascade do |t|
     t.string "title"
     t.text "body"
@@ -32,4 +42,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_05_17_143137) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
+
+  add_foreign_key "comments", "quests"
+  add_foreign_key "comments", "users"
 end

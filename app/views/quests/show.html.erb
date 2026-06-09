@@ -20,10 +20,43 @@
         <% if @quest.user == current_user %>
           <%= link_to "作戦変更", edit_quest_path(@quest), class: "btn btn-success" %>
           <%= button_to "クエスト取消", quest_path(@quest), method: :delete, onclick: "return confirm('本当にこのクエストを取り消しますか？');", class: "btn btn-danger" %>
-
         <% end %>
       </div>
     </div>
   </div>
-</div>
 
+  <div class="mt-5">
+    <h3 class="text-white fw-bold mb-3">ギルド掲示板（コメント一覧）</h3>
+    
+    <% @quest.comments.each do |comment| %>
+      <% if comment.persisted? %> <div class="comment mb-3 p-3 bg-light border rounded text-dark">
+          <p class="fw-bold mb-1">
+            冒険者: 
+            <%= link_to user_path(comment.user), class: "text-dark text-decoration-none fw-bold" do %>
+              👤 <%= comment.user.name %>
+            <% end %>
+          </p>
+          <p class="mb-2"><%= comment.comment %></p>
+
+          <% if comment.user == current_user %>
+            <div class="mt-2">
+              <%= button_to "クエスト（コメント）取り消し", quest_comment_path(@quest, comment), method: :delete, onclick: "return confirm('本当に削除しますか？');", data: { turbo: false }, class: "btn btn-sm btn-outline-danger" %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+
+    <hr class="my-2 border-light">
+
+    <h4 class="mb-1 text-white fw-bold">進捗報告・応援メッセージ</h4>
+    
+    <%= form_with(model: [@quest, Comment.new], local: true) do |f| %>
+      <div class="comment-form-container">
+        <%= f.text_area :comment, class: "form-control mt-1 mb-0 comment-textarea", rows: 3, placeholder: "クエストへの進捗報告や応援を書き込もう！" %>
+        
+        <%= f.submit "送信", class: "custom-submit-btn" %>
+      </div>
+    <% end %>
+  </div>
+</div>

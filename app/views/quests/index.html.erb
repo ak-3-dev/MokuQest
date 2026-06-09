@@ -15,10 +15,18 @@
               <div style="flex: 1; min-width: 250px;">
                 <div class="d-flex align-items-center gap-2 mb-2">
                   <h5 class="card-title fw-bold text-dark mb-0"><%= quest.title %></h5>
+                  
                   <span class="badge bg-info text-dark">
-                    👤 <%= quest.user.name %>
+                    <%= link_to user_path(quest.user), class: "text-dark text-decoration-none" do %>
+                      👤 <%= quest.user.name %>
+                    <% end %>
+                  </span>
+
+                  <span class="badge bg-secondary text-white">
+                    💬 <%= quest.comments.count %>件
                   </span>
                 </div>
+                
                 <p class="card-text text-muted small mb-0">
                   <%= truncate(quest.body, length: 80) %>
                 </p>
