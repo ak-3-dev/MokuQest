@@ -54,7 +54,7 @@ companion2.quests.create!([
 puts "📜 タイムライン用のクエストデータを配置しました。"
 
 Admin.find_or_create_by!(email: "admin@example.com") do |admin|
-  admin.password = "password"
+  admin.password = "git checkout main"
   admin.password_confirmation = "password" 
 end
 puts "👑 ギルドマスター（管理者）を作成しました（email: admin@example.com）"
