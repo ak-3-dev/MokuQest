@@ -29,7 +29,8 @@
     <h3 class="text-white fw-bold mb-3">ギルド掲示板（コメント一覧）</h3>
     
     <% @quest.comments.each do |comment| %>
-      <% if comment.persisted? %> <div class="comment mb-3 p-3 bg-light border rounded text-dark">
+      <% if comment.persisted? %> 
+        <div class="comment mb-3 p-3 bg-light border rounded text-dark">
           <p class="fw-bold mb-1">
             冒険者: 
             <%= link_to user_path(comment.user), class: "text-dark text-decoration-none fw-bold" do %>
@@ -50,6 +51,12 @@
     <hr class="my-2 border-light">
 
     <h4 class="mb-1 text-white fw-bold">進捗報告・応援メッセージ</h4>
+    
+    <% if alert %>
+      <div class="alert alert-danger text-danger fw-bold my-2" style="background-color: #f8d7da; border-color: #f5c6cb; border-radius: 6px;">
+        ⚠️ <%= alert %>
+      </div>
+    <% end %>
     
     <%= form_with(model: [@quest, Comment.new], local: true) do |f| %>
       <div class="comment-form-container">
