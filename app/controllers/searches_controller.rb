@@ -1,16 +1,29 @@
 class SearchesController < ApplicationController
   def search
-    if params[:range] == "user"
-     if params[:search_method] == "perfect"
-        @results = User.where(name: params[:keyword]) 
-      elsif params[:search_method] == "partial"
-        @results = User.where("name LIKE ?", "%#{params[:keyword]}%") 
+    @range = params[:range]
+    @search_method = params[:search_method]
+    @keyword = params[:keyword]
+
+    if @keyword.blank?
+      if @range == "user"
+        @results = User.all
+      elsif @range == "quest"
+        @results = Quest.all
       end
-    elsif params[:range] == "quest"
-      if params[:search_method] == "perfect"
-        @results = Quest.where(title: params[:keyword])
-      elsif params[:search_method] == "partial"
-        @results =Quest.where("title LIKE ?", "%#{params[:keyword]}%")
+      return
+    end
+
+    if @range == "user"
+      if @search_method == "perfect"
+        @results = User.where(name: @keyword) 
+      elsif @search_method == "partial"
+        @results = User.where("name LIKE ?", "%#{@keyword}%") 
+      end
+    elsif @range == "quest"
+      if @search_method == "perfect"
+        @results = Quest.where(title: @keyword)
+      elsif @search_method == "partial"
+        @results = Quest.where("title LIKE ?", "%#{@keyword}%")
       end
     end
   end
