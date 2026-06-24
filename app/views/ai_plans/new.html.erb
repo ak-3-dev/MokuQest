@@ -1,0 +1,20 @@
+<h1>AIクエスト生成</h1>
+
+<%= form_with model: @ai_plan do |f| %>
+  <div>
+    <%= f.label :goal, "達成したい目標" %>
+    <%= f.text_area :goal %>
+  </div>
+
+  <div>
+    <%= f.label :period, "期間" %>
+    <%= f.text_field :period %>
+  </div>
+
+  <div>
+    <%= f.label :level, "現在のレベル" %>
+    <%= f.select :level, ["初心者", "中級者", "上級者"] %>
+  </div>
+
+  <%= f.submit "クエスト生成" %>
+<% end %>

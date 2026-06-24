@@ -1,0 +1,35 @@
+<h1><%= @ai_plan.goal %></h1>
+
+<p>期間: <%= @ai_plan.period %></p>
+<p>レベル: <%= @ai_plan.level %></p>
+
+<hr>
+
+<% @ai_plan.ai_tasks.each do |task| %>
+  <div class="card mb-3">
+    <div class="card-body">
+
+      <h4>
+        <% if task.completed %>
+          ✅
+        <% else %>
+          ☐
+        <% end %>
+
+        <%= task.title %>
+      </h4>
+
+      <p><%= task.description %></p>
+
+      <p>EXP: <%= task.exp %></p>
+
+      <% unless task.completed %>
+        <%= button_to "達成する",
+          complete_ai_plan_ai_task_path(@ai_plan, task),
+          method: :patch,
+          class: "btn btn-success" %>
+      <% end %>
+
+    </div>
+  </div>
+<% end %>
