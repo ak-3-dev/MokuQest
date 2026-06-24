@@ -14,6 +14,16 @@ Rails.application.routes.draw do
   resources :quests do
     resources :comments, only: [:create, :destroy]
   end
+
+  # config/routes.rb
+
+  resources :ai_plans do
+    resources :ai_tasks, only: [] do
+      member do
+        patch :complete
+      end
+    end
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

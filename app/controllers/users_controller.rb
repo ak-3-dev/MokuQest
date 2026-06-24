@@ -2,6 +2,18 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @quests = @user.quests.order(created_at: :desc)
+    @ai_plan = @user.ai_plans.order(created_at: :desc).first
+    if @ai_plan.present?
+      @completed_tasks = @ai_plan.ai_tasks.where(completed: true).count
+      @total_tasks = @ai_plan.ai_tasks.count
+
+      @completion_rate =
+        if @total_tasks.zero?
+          0
+        else
+          (@completed_tasks.to_f / @total_tasks * 100).round
+        end
+    end
   end
 
   def edit

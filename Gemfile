@@ -65,7 +65,12 @@ end
 gem "devise"
 
 gem "dotenv-rails"
+
+gem 'ruby-openai'
+gem 'dotenv-rails', groups: [:development, :test]
+
 group :production do
   gem "mysql2"
 end
+
 

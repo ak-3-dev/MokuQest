@@ -1,0 +1,2 @@
+module AiPlansHelper
+end
