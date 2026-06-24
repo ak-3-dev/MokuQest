@@ -1,27 +1,30 @@
-<h1><%= @ai_plan.goal %></h1>
+<h2 class="fw-bold fs-3 text-center"
+    style="color: #ffc107; display: table; margin: 0 auto 24px; border-bottom: 3px solid #ffc107; padding-bottom: 10px;">
+  🎯 <%= @ai_plan.goal %>
+</h2>
 
-<p>期間: <%= @ai_plan.period %></p>
-<p>レベル: <%= @ai_plan.level %></p>
-
-<hr>
-
+<div class="text-center mb-4" style="color: #ffc107;">
+  📅 <span class="fs-5 fw-bold">期間: <%= @ai_plan.period %></span>
+  <span class="mx-3">|</span>
+  ⭐ <span class="fs-5 fw-bold">レベル: <%= @ai_plan.level %></span>
+</div>
 <% @ai_plan.ai_tasks.each do |task| %>
-  <div class="card mb-3">
+  <details class="card mb-3">
+
+    <summary class="card-header">
+      <% if task.completed %>
+        ✅
+      <% else %>
+        ☐
+      <% end %>
+
+      <%= task.title %>
+      （<%= task.exp %> EXP）
+    </summary>
+
     <div class="card-body">
 
-      <h4>
-        <% if task.completed %>
-          ✅
-        <% else %>
-          ☐
-        <% end %>
-
-        <%= task.title %>
-      </h4>
-
-      <p><%= task.description %></p>
-
-      <p>EXP: <%= task.exp %></p>
+      <%= simple_format(task.description) %>
 
       <% unless task.completed %>
         <%= button_to "達成する",
@@ -31,5 +34,6 @@
       <% end %>
 
     </div>
-  </div>
+
+  </details>
 <% end %>
