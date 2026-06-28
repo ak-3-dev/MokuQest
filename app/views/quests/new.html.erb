@@ -1,8 +1,8 @@
-<% if @quest.errors.any? %>
+<% if @ai_plan.errors.any? %>
   <div class="alert alert-danger container mt-4">
-    <h5 class="fw-bold">⚠️ <%= @quest.errors.count %> 件のエラーにより保存できませんでした:</h5>
+    <h5 class="fw-bold">⚠️ <%= @ai_plan.errors.count %> 件のエラーにより保存できませんでした:</h5>
     <ul>
-      <% @quest.errors.full_messages.each do |message| %>
+      <% @ai_plan.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
     </ul>
@@ -17,14 +17,28 @@
           <h3 class="mb-0 fw-bold">📜 新規クエスト受注</h3>
         </div>
         <div class="card-body p-4">
-          <%= form_with model: @quest, local: true do |f| %>
+          <%= form_with model: @ai_plan, url: ai_plans_path, local: true do |f| %>
             <div class="mb-3">
-              <%= f.label :title, "クエスト名（目標）", class: "form-label fw-bold" %>
-              <%= f.text_field :title, class: "form-control", placeholder: "例：Rubyを極める" %>
+              <%= f.label :goal, "達成したい目標", class: "form-label fw-bold" %>
+              <%= f.text_area :goal,
+                  class: "form-control",
+                  rows: 3,
+                  placeholder: "例：Railsエンジニアになる" %>
             </div>
+
             <div class="mb-3">
-              <%= f.label :body, "詳細内容", class: "form-label fw-bold" %>
-              <%= f.text_area :body, class: "form-control", rows: 6, placeholder: "何を達成するか詳しく書こう" %>
+              <%= f.label :period, "期間", class: "form-label fw-bold" %>
+              <%= f.text_field :period,
+                  class: "form-control",
+                  placeholder: "例：180日" %>
+            </div>
+
+            <div class="mb-3">
+              <%= f.label :level, "現在のレベル", class: "form-label fw-bold" %>
+              <%= f.select :level,
+                  ["初心者", "中級者", "上級者"],
+                  {},
+                  class: "form-select" %>
             </div>
             <%= f.submit "クエストを受注する", class: "btn btn-warning w-100 fw-bold shadow-sm" %>
           <% end %>

@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @quests = @user.quests.order(created_at: :desc)
-    @ai_plan = @user.ai_plans.order(created_at: :desc).first
+    @ai_plan = @user.ai_plans.find_by(plan_date: Date.current)
     if @ai_plan.present?
       @completed_tasks = @ai_plan.ai_tasks.where(completed: true).count
       @total_tasks = @ai_plan.ai_tasks.count
