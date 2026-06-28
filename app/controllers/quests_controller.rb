@@ -7,7 +7,7 @@ class QuestsController < ApplicationController
   end
 
   def new
-    @quest = Quest.new
+    redirect_to new_ai_plan_path
   end
 
   def create

@@ -4,8 +4,16 @@ class AiPlansController < ApplicationController
   end
 
   def create
+    @quest = current_user.quests.create!(
+      title: ai_plan_params[:goal],
+      body: "#{ai_plan_params[:goal]}を達成するためのAIクエスト"
+    )
+
     @ai_plan = current_user.ai_plans.create!(
-      ai_plan_params
+      ai_plan_params.merge(
+        plan_date: Date.current,
+        quest: @quest
+      )
     )
 
     tasks = OpenaiService.generate_quest(
@@ -23,7 +31,8 @@ class AiPlansController < ApplicationController
       )
     end
 
-    redirect_to @ai_plan
+    redirect_to user_path(current_user),
+                notice: "AIクエストを受注しました!"
   end
 
   def show

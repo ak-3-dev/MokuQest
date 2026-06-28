@@ -137,7 +137,14 @@
                     <p class="card-text text-muted small mb-0 text-truncate"><%= quest.body %></p>
                   </div>
                   <div class="text-end" style="flex-shrink: 0;">
-                    <%= link_to "作戦確認", quest_path(quest), class: "btn btn-warning btn-sm fw-bold px-3" %>
+                    <%= link_to "AIクエスト",
+                          ai_plan_path(quest.ai_plan),
+                          class: "btn btn-success btn-sm fw-bold px-3" %>
+                    <% else %>
+                      <%= link_to "📜 作戦確認",
+                          quest_path(quest),
+                          class: "btn btn-warning btn-sm fw-bold px-3" %>
+                    <% end %>
                   </div>
                 </div>
               </div>

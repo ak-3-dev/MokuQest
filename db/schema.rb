@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_06_23_072804) do
+ActiveRecord::Schema[8.0].define(version: 2026_06_28_132627) do
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -30,6 +30,9 @@ ActiveRecord::Schema[8.0].define(version: 2026_06_23_072804) do
     t.string "level"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "plan_date"
+    t.integer "quest_id"
+    t.index ["quest_id"], name: "index_ai_plans_on_quest_id"
     t.index ["user_id"], name: "index_ai_plans_on_user_id"
   end
 
@@ -92,6 +95,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_06_23_072804) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "ai_plans", "quests"
   add_foreign_key "ai_plans", "users"
   add_foreign_key "ai_tasks", "ai_plans"
   add_foreign_key "comments", "quests"
