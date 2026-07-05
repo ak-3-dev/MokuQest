@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_06_28_132627) do
+ActiveRecord::Schema[8.0].define(version: 2026_07_05_111810) do
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -32,6 +32,8 @@ ActiveRecord::Schema[8.0].define(version: 2026_06_28_132627) do
     t.datetime "updated_at", null: false
     t.date "plan_date"
     t.integer "quest_id"
+    t.integer "current_day", default: 1
+    t.date "started_on"
     t.index ["quest_id"], name: "index_ai_plans_on_quest_id"
     t.index ["user_id"], name: "index_ai_plans_on_user_id"
   end
@@ -44,6 +46,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_06_28_132627) do
     t.boolean "completed"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "day"
     t.index ["ai_plan_id"], name: "index_ai_tasks_on_ai_plan_id"
   end
 

@@ -12,6 +12,8 @@ class AiPlansController < ApplicationController
     @ai_plan = current_user.ai_plans.create!(
       ai_plan_params.merge(
         plan_date: Date.current,
+        started_on: Date.current,
+        current_day: 1,
         quest: @quest
       )
     )
@@ -22,13 +24,17 @@ class AiPlansController < ApplicationController
       @ai_plan.level
     )
 
-    tasks["today_tasks"].each do |task|
-      @ai_plan.ai_tasks.create!(
-        title: task["title"],
-        description: task["description"],
-        exp: task["exp"],
-        completed: false
-      )
+    tasks["days"].each do |day_data|
+      day_data["tasks"].each do |task|
+
+        @ai_plan.ai_tasks.create!(
+          title: task["title"],
+          description: task["description"],
+          exp: task["exp"],
+          completed: false,
+          day: day_data["day"]
+        )
+      end
     end
 
     redirect_to user_path(current_user),
@@ -37,6 +43,10 @@ class AiPlansController < ApplicationController
 
   def show
     @ai_plan = AiPlan.find(params[:id])
+    
+    @today_tasks = @ai_plan.ai_tasks.where(
+      day: @ai_plan.current_day
+    )
   end
 
   private
