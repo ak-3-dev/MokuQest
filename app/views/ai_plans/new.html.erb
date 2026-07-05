@@ -1,20 +1,67 @@
-<h1>AIクエスト生成</h1>
+<h2 class="fw-bold text-center mb-5"
+    style="color:#ffc107;
+           text-shadow:2px 2px 6px rgba(0,0,0,.8);
+           border-bottom:3px solid #ffc107;
+           display:table;
+           margin:0 auto 30px;
+           padding-bottom:10px;">
+  📜 AIクエスト受注
+</h2>
 
-<%= form_with model: @ai_plan do |f| %>
-  <div>
-    <%= f.label :goal, "達成したい目標" %>
-    <%= f.text_area :goal %>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+
+      <%= form_with model: @ai_plan do |f| %>
+
+        <div class="quest-paper">
+
+          <div class="mb-4">
+            <%= f.label :goal,
+                "🎯 達成したい目標",
+                class: "fw-bold mb-2",
+                style: "color:#ffc107;
+                        text-shadow:1px 1px 4px rgba(0,0,0,.8);" %>
+
+            <%= f.text_area :goal,
+                  class: "form-control quest-input",
+                  rows: 5 %>
+          </div>
+
+          <div class="mb-4">
+            <%= f.label :period,
+                "📅 期間",
+                class: "fw-bold mb-2",
+                style: "color:#ffc107;
+                        text-shadow:1px 1px 4px rgba(0,0,0,.8);" %>
+
+            <%= f.text_field :period,
+                  class: "form-control quest-input" %>
+          </div>
+
+          <div class="mb-5">
+            <%= f.label :level,
+                "⭐ 現在のレベル",
+                class: "fw-bold mb-2",
+                style: "color:#ffc107;
+                        text-shadow:1px 1px 4px rgba(0,0,0,.8);" %>
+
+            <%= f.select :level,
+                  [["初心者","初心者"],
+                  ["初級者","初級者"],
+                  ["中級者","中級者"],
+                  ["上級者","上級者"]],
+                  {},
+                  class: "form-select quest-input" %>
+          </div>
+
+          <%= f.submit "⚔️ AIクエストを受注する",
+              class: "btn btn-warning w-100 fw-bold py-3 fs-4 shadow" %>
+
+        </div>
+
+      <% end %>
+
+    </div>
   </div>
-
-  <div>
-    <%= f.label :period, "期間" %>
-    <%= f.text_field :period %>
-  </div>
-
-  <div>
-    <%= f.label :level, "現在のレベル" %>
-    <%= f.select :level, ["初心者", "中級者", "上級者"] %>
-  </div>
-
-  <%= f.submit "クエスト生成" %>
-<% end %>
+</div>

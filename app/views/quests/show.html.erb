@@ -14,6 +14,54 @@
     <div class="card-body p-4" style="background-color: #fafafa;">
       <p class="lead" style="white-space: pre-wrap;"><%= @quest.body %></p>
       <hr>
+      <% if @ai_plan.present? %>
+        <div class="card border-success mt-4 mb-4">
+          <div class="card-header bg-success text-white">
+            🤖 AIクエスト
+          </div>
+
+          <div class="card-body">
+
+            <p class="mb-1">
+              <strong>期間:</strong>
+              <%= @ai_plan.period %>
+            </p>
+
+            <p class="mb-3">
+              <strong>レベル:</strong>
+              <%= @ai_plan.level %>
+            </p>
+
+            <% @ai_plan.ai_tasks.each do |task| %>
+
+              <div class="d-flex justify-content-between mb-2">
+
+                <div>
+                  <% if task.completed %>
+                    ✅
+                  <% else %>
+                    ☐
+                  <% end %>
+
+                  <%= task.title %>
+                </div>
+
+                <span>
+                  <%= task.exp %> EXP
+                </span>
+
+              </div>
+
+            <% end %>
+
+            <%= link_to "AIクエスト詳細",
+                ai_plan_path(@ai_plan),
+                class: "btn btn-outline-success btn-sm mt-3" %>
+
+          </div>
+        </div>
+
+      <% end %>
       <div class="mt-4 d-flex gap-2">
         <%= link_to "掲示板に戻る", quests_path, class: "btn btn-secondary" %>
 

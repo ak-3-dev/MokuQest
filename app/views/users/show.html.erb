@@ -64,62 +64,120 @@
     
     <div class="col-md-8">
     <% if @ai_plan %>
-      <div class="card shadow border-success mb-4">
-        <div class="card-header bg-success text-white">
+
+      <% if @plan_completed %>
+
+        <div class="card shadow border-warning mb-4">
+          <div class="card-header bg-warning text-dark fw-bold">
+            🏆 AIクエスト完全達成！
+          </div>
+
+          <div class="card-body text-center">
+
+            <h4 class="fw-bold mb-3">
+              🎉 <%= @ai_plan.goal %>
+            </h4>
+
+            <p>
+              AIクエストをすべて達成しました！
+            </p>
+
+            <%= link_to "新しいAIクエストを受注する",
+                new_ai_plan_path,
+                class: "btn btn-warning fw-bold" %>
+
+          </div>
+        </div>
+
+      <% else %>
+
+        <div class="card shadow border-success mb-4">
+          <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
+            <span>📋 今日のミッション</span>
+
+            <span class="badge bg-light text-success fs-6">
+              Day <%= @today_day %> / <%= @total_days %>
+            </span>
+          </div>
+
+          <div class="card-body">
+
+            <div class="mt-0">
+              <strong>冒険の進行度</strong>
+
+              <div class="progress mt-2" style="height: 22px;">
+                <div
+                  class="progress-bar bg-warning text-dark fw-bold"
+                  role="progressbar"
+                  style="width: <%= @plan_progress %>%">
+
+                  <%= @plan_progress %>%
+
+                </div>
+              </div>
+            </div>
+
+            <% @today_tasks.each do |task| %>
+              <div class="d-flex justify-content-between align-items-center mb-3">
+
+                <div>
+                  <% if task.completed %>
+                    ✅
+                  <% else %>
+                    ☐
+                  <% end %>
+
+                  <%= task.title %>
+                </div>
+
+                <span>
+                  <%= task.exp %> EXP
+                </span>
+
+              </div>
+            <% end %>
+
+            <hr>
+
+            <div class="text-center my-3">
+              <strong>
+                今日の達成状況
+              </strong>
+
+              <div class="fs-4 fw-bold mt-2">
+                <%= @completed_tasks %> / <%= @total_tasks %> ミッション達成
+              </div>
+            </div>
+
+            <%= link_to "詳細を見る",
+                ai_plan_path(@ai_plan),
+                class: "btn btn-outline-success btn-sm mt-3" %>
+
+          </div>
+        </div>
+
+      <% end %>
+
+    <% else %>
+
+      <div class="card shadow border-warning mb-4">
+        <div class="card-header bg-warning text-dark fw-bold">
           🤖 今日のAIクエスト
         </div>
 
-        <div class="card-body">
+        <div class="card-body text-center">
 
-          <div class="mb-3">
-            <strong>達成率</strong>
+          <p class="mb-3">
+            今日のAIクエストはまだ受注していません。
+          </p>
 
-            <div class="progress">
-              <div
-                class="progress-bar bg-success"
-                role="progressbar"
-                style="width: <%= @completion_rate %>%">
-                <%= @completion_rate %>%
-              </div>
-            </div>
-
-            <small>
-              <%= @completed_tasks %> / <%= @total_tasks %> 件達成
-            </small>
-          </div>
-
-          <% if @completion_rate == 100 %>
-            <div class="alert alert-success">
-              🎉 本日のクエスト達成！
-            </div>
-          <% end %>
-
-          <% @ai_plan.ai_tasks.each do |task| %>
-            <div class="d-flex justify-content-between align-items-center mb-2">
-
-              <div>
-                <% if task.completed %>
-                  ✅
-                <% else %>
-                  ☐
-                <% end %>
-
-                <%= task.title %>
-              </div>
-
-              <span>
-                <%= task.exp %> EXP
-              </span>
-
-            </div>
-          <% end %>
-
-          <%= link_to "詳細を見る",
-              ai_plan_path(@ai_plan),
-              class: "btn btn-outline-success btn-sm mt-3" %>
+          <%= link_to "AIクエストを受注する",
+              new_ai_plan_path,
+              class: "btn btn-warning fw-bold" %>
 
         </div>
       </div>
+
     <% end %>
     
       <h2 class="fw-bold fs-3 text-center" style="color: #3e2723; display: table; margin: 0 auto 24px; border-bottom: 3px solid #ffc107; padding-bottom: 10px;">
@@ -137,7 +195,8 @@
                     <p class="card-text text-muted small mb-0 text-truncate"><%= quest.body %></p>
                   </div>
                   <div class="text-end" style="flex-shrink: 0;">
-                    <%= link_to "AIクエスト",
+                    <% if quest.ai_plan.present? %>
+                      <%= link_to "AIクエスト",
                           ai_plan_path(quest.ai_plan),
                           class: "btn btn-success btn-sm fw-bold px-3" %>
                     <% else %>

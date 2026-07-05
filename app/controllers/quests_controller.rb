@@ -22,6 +22,7 @@ class QuestsController < ApplicationController
 
   def show
     @quest = Quest.find(params[:id])
+    @ai_plan = @quest.ai_plan
   end
 
   def edit
