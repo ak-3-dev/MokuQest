@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_07_05_111810) do
+ActiveRecord::Schema[8.0].define(version: 2026_07_11_065316) do
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -60,6 +60,26 @@ ActiveRecord::Schema[8.0].define(version: 2026_07_05_111810) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
+  create_table "group_requests", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "group_id", null: false
+    t.integer "status", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_group_requests_on_group_id"
+    t.index ["user_id"], name: "index_group_requests_on_user_id"
+  end
+
+  create_table "groups", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.text "rules"
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_groups_on_user_id"
+  end
+
   create_table "quests", force: :cascade do |t|
     t.string "title"
     t.text "body"
@@ -103,4 +123,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_07_05_111810) do
   add_foreign_key "ai_tasks", "ai_plans"
   add_foreign_key "comments", "quests"
   add_foreign_key "comments", "users"
+  add_foreign_key "group_requests", "groups"
+  add_foreign_key "group_requests", "users"
+  add_foreign_key "groups", "users"
 end

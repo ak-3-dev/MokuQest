@@ -16,6 +16,9 @@ Rails.application.routes.draw do
   end
 
   # config/routes.rb
+  resources :groups do
+    resources :group_requests,only: [:create, :index, :update, :destroy]
+  end
 
   resources :ai_plans do
     resources :ai_tasks, only: [] do
