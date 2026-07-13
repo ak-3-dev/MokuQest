@@ -23,8 +23,10 @@
           <%= button_to "削除",
               admin_group_path(group),
               method: :delete,
-              data: {
-                turbo_confirm: "このグループを削除しますか？"
+              form: {
+                data: {
+                  turbo_confirm: "このグループを削除しますか？"
+                }
               },
               class: "btn btn-danger btn-sm" %>
         </td>

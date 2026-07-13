@@ -64,7 +64,6 @@ end
 
 gem "devise"
 
-gem "dotenv-rails"
 
 gem 'ruby-openai'
 gem 'dotenv-rails', groups: [:development, :test]
