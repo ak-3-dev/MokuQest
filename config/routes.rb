@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :admins, path: :admin
   namespace :admin do
     resources :users, only: [:index, :show, :destroy]
+    resources :groups, only: [:index, :destroy]
   end
   get "searches/search"
   devise_for :users, controllers: {
