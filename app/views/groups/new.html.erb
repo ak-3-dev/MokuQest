@@ -1,0 +1,24 @@
+<h1>グループ作成</h1>
+<%= form_with model: @group, local: true do |f| %>
+  <div class="mb-3">
+    <%= f.label :name, "グループ名", class: "form-label fw-bold" %>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+  
+  <div class="mb-3">
+    <%= f.label :description, "説明", class: "form-label fw-bold" %>
+    <%= f.text_area :description,
+        class: "form-control",
+        rows: 3,  
+        placeholder: "グループの目的や活動内容を入力してください" %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :rules, "ルール", class: "form-label fw-bold" %>
+    <%= f.text_area :rules,
+        class: "form-control",
+        rows: 5,  
+        placeholder: "グループを作る上でのルール内容を記入してください" %>
+  </div>
+  <%= f.submit "グループを作成", class: "btn btn-warning w-100 fw-bold shadow-sm" %>
+<% end %>
