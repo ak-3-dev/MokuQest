@@ -1,24 +1,41 @@
-<h1>グループ作成</h1>
-<%= form_with model: @group, local: true do |f| %>
-  <div class="mb-3">
-    <%= f.label :name, "グループ名", class: "form-label fw-bold" %>
-    <%= f.text_field :name, class: "form-control" %>
-  </div>
-  
-  <div class="mb-3">
-    <%= f.label :description, "説明", class: "form-label fw-bold" %>
-    <%= f.text_area :description,
-        class: "form-control",
-        rows: 3,  
-        placeholder: "グループの目的や活動内容を入力してください" %>
-  </div>
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="card shadow-lg border-warning bg-dark bg-opacity-75 text-light">
+        <div class="card-header text-center border-warning">
+          <h2 class="fw-bold text-warning mb-0">
+            ⚔ ギルド作成
+          </h2>
+        </div>
 
-  <div class="mb-3">
-    <%= f.label :rules, "ルール", class: "form-label fw-bold" %>
-    <%= f.text_area :rules,
-        class: "form-control",
-        rows: 5,  
-        placeholder: "グループを作る上でのルール内容を記入してください" %>
+        <div class="card-body p-4">
+          <%= form_with model: @group, local: true do |f| %>
+            <div class="mb-3">
+              <%= f.label :name, "ギルド名", class: "form-label fw-bold" %>
+              <%= f.text_field :name,
+                  class: "form-control py-2",
+                  placeholder: "例）みんなの冒険者ギルド" %>
+            </div>
+  
+            <div class="mb-3">
+              <%= f.label :description, "説明", class: "form-label fw-bold" %>
+              <%= f.text_area :description,
+                  class: "form-control py-2",
+                  rows: 3,  
+                  placeholder: "例）\n毎日の学習報告や質問・相談を行うギルドです。" %>
+            </div>
+
+            <div class="mb-3">
+              <%= f.label :rules, "ギルド規約", class: "form-label fw-bold" %>
+              <%= f.text_area :rules,
+                  class: "form-control py-2",
+                  rows: 5,  
+                  placeholder: "例）\n・誹謗中傷は禁止\n・初心者歓迎\n・週1回進捗報告" %>
+            </div>
+            <%= f.submit "ギルドを設立する", class: "btn btn-warning w-100 fw-bold shadow-sm" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
   </div>
-  <%= f.submit "グループを作成", class: "btn btn-warning w-100 fw-bold shadow-sm" %>
-<% end %>
+</div>

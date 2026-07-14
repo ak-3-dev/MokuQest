@@ -41,8 +41,15 @@
                 </li>
                 <li class="nav-item">
                   <%= link_to "クエスト受注", new_quest_path, class: "btn btn-outline-warning btn-sm mx-1 fw-bold" %>
-                </li><li class="nav-item">
+                </li>
+                <li class="nav-item">
                   <%= link_to "クエスト一覧", quests_path, class: "btn btn-outline-warning btn-sm mx-1 fw-bold" %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "ギルド設立", new_group_path, class: "btn btn-outline-warning btn-sm mx-1 fw-bold" %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "ギルド掲示板", groups_path, class: "btn btn-outline-warning btn-sm mx-1 fw-bold" %>
                 </li>
                 <li class="nav-item text-white me-3">
                   階級: 冒険者 (<%= current_user.name %>)
