@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
   devise_for :admins, path: :admin
   namespace :admin do
+    get "comments/index"
     resources :users, only: [:index, :show, :destroy]
     resources :groups, only: [:index, :destroy]
+    resources :comments, only: [:index, :destroy]
   end
   get "searches/search"
   devise_for :users, controllers: {

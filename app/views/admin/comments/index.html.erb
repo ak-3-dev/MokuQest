@@ -1,0 +1,38 @@
+<h1 class="admin-title">コメント一覧</h1>
+<div class="title-line"></div>
+
+<table class="admin-table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>投稿者</th>
+      <th>クエスト</th>
+      <th>コメント</th>
+      <th>投稿日</th>
+      <th>削除</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @comments.each do |comment| %>
+      <tr>
+        <td><%= comment.id %></td>
+        <td><%= comment.user.name %></td>
+        <td><%= comment.quest.title %></td>
+        <td><%= truncate(comment.comment, length: 50) %></td>
+        <td><%= l comment.created_at, format: :short %></td>
+        <td>
+          <%= button_to "削除",
+              admin_comment_path(comment),
+              method: :delete,
+              form: {
+                data: {
+                  turbo_confirm: "このコメントを削除しますか？"
+                }
+              },
+              class: "btn btn-danger btn-sm" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
