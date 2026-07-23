@@ -49,43 +49,55 @@
           <% end %>
 
           <div class="d-grid gap-2 mt-4">
-            <% request = current_user.group_requests.find_by(group: @group) %>
-            <% if current_user == @group.user %>
-              <button class="btn btn-secondary w-100" disabled>
-                グループ管理者
-              </button>
-            <% elsif request.nil? %>
-              <%= button_to "参加申請",
-                  group_group_requests_path(@group),
-                  method: :post,
+            <% if user_signed_in? %>
+              <% request = current_user.group_requests.find_by(group: @group) %>
+
+              <% if current_user == @group.user %>
+                <button class="btn btn-secondary w-100" disabled>
+                  グループ管理者
+                </button>
+
+              <% elsif request.nil? %>
+                <%= button_to "参加申請",
+                    group_group_requests_path(@group),
+                    method: :post,
+                    class: "btn btn-success fw-bold w-100" %>
+
+              <% elsif request.pending? %>
+                <button class="btn btn-warning w-100" disabled>
+                  申請中
+                </button>
+
+              <% elsif request.approved? %>
+                <%= button_to "退会する",
+                    group_group_request_path(@group, request),
+                    method: :delete,
+                    data: {
+                      turbo_confirm: "本当に退会しますか？"
+                    },
+                    class: "btn btn-danger fw-bold w-100" %>
+
+              <% elsif request.rejected? %>
+                <button class="btn btn-danger w-100" disabled>
+                  却下されています
+                </button>
+              <% end %>
+
+            <% else %>
+              <%= link_to "ログインして参加申請する",
+                  new_user_session_path,
                   class: "btn btn-success fw-bold w-100" %>
-            <% elsif request.pending? %>
-              <button class="btn btn-warning w-100" disabled>
-                申請中
-              </button>
-            <% elsif request.approved? %>
-              <%= button_to "退会する",
-                  group_group_request_path(@group,request),
-                  method: :delete,
-                  data: {
-                    turbo_confirm: "本当に退会しますか？"
-                  },
-                  class: "btn btn-danger fw-bold w-100" %>
-            <% elsif request.rejected? %>
-              <button class="btn btn-danger w-100" disabled>
-                却下されています
-              </button>
             <% end %>
 
             <%= link_to "グループ一覧へ戻る",
                 groups_path,
                 class: "btn btn-outline-secondary" %>
 
-            <% if current_user == @group.user %>
+            <% if user_signed_in? && current_user == @group.user %>
               <%= link_to "参加申請一覧",
                   group_group_requests_path(@group),
                   class: "btn btn-outline-primary" %>
-            
+
               <%= button_to "グループを削除",
                   group_path(@group),
                   method: :delete,
