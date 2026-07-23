@@ -23,6 +23,12 @@ class QuestsController < ApplicationController
   def show
     @quest = Quest.find(params[:id])
     @ai_plan = @quest.ai_plan
+
+    if @ai_plan.present?
+      @completed_count = @ai_plan.completed_days_count
+      @total_count = @ai_plan.period.to_i
+      @progress = (@completed_count.to_f / @total_count * 100).round
+    end
   end
 
   def edit

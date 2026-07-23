@@ -8,6 +8,17 @@
           </h2>
         </div>
 
+        <% if @group.errors.any? %>
+          <div class="alert alert-danger m-3">
+            <h5 class="mb-2">入力内容を確認してください。</h5>
+            <ul class="mb-0">
+              <% @group.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
         <div class="card-body p-4">
           <%= form_with model: @group, local: true do |f| %>
             <div class="mb-3">

@@ -7,7 +7,7 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
-puts "『MokuQuest』の世界に聖なるシードデータを流し込みます..."
+puts "『MokuQuest』の世界にシードデータを流し込みます..."
 
 Quest.delete_all
 User.delete_all
