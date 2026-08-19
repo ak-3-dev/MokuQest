@@ -8,32 +8,112 @@
   <span class="mx-3">|</span>
   ⭐ <span class="fs-5 fw-bold">レベル: <%= @ai_plan.level %></span>
 </div>
-<% @today_tasks.each do |task| %>
-  <details class="card mb-3">
 
-    <summary class="card-header">
-      <% if task.completed %>
-        ✅
-      <% else %>
-        ☐
-      <% end %>
+<% if @ai_plan.ai_tasks.empty? %>
 
-      <%= task.title %>
-      （<%= task.exp %> EXP）
-    </summary>
-
-    <div class="card-body">
-
-      <%= simple_format(task.description) %>
-
-      <% unless task.completed %>
-        <%= button_to "達成する",
-          complete_ai_plan_ai_task_path(@ai_plan, task),
-          method: :patch,
-          class: "btn btn-success" %>
-      <% end %>
-
+  <div class="text-center mt-5">
+    <div class="spinner-border text-warning mb-4"
+         role="status"
+         style="width: 4rem; height: 4rem;">
+      <span class="visually-hidden">Loading...</span>
     </div>
 
-  </details>
+    <h3 class="fw-bold text-warning mb-3">
+      ⚔️ クエストを生成しています...
+    </h3>
+
+    <p id="loading-message" class="fs-5">
+      ギルドマスターがあなたの目標を分析しています...
+    </p>
+
+    <p class="text-muted">
+      しばらくお待ちください...
+    </p>
+  </div>
+
+  <script>
+  const messages = [
+    "ギルドマスターがあなたの目標を分析しています...",
+    "現在の冒険者レベルを確認しています...",
+    "最終目標までの冒険ルートを探索しています...",
+    "あなたに合ったクエスト難易度を調整しています...",
+    "毎日のクエストを編成しています...",
+    "獲得EXPのバランスを確認しています...",
+    "冒険の準備はもうすぐ完了です..."
+  ];
+
+  let messageIndex = 0;
+  const messageElement = document.getElementById("loading-message");
+
+  // 1.5秒ごとにメッセージを変更
+  setInterval(() => {
+    messageIndex = (messageIndex + 1) % messages.length;
+    messageElement.textContent = messages[messageIndex];
+  }, 1500);
+
+  // AIクエストの生成状況を確認
+  const checkGenerationStatus = async () => {
+    try {
+      const response = await fetch(
+        "<%= status_ai_plan_path(@ai_plan) %>",
+        {
+          headers: {
+            "Accept": "application/json"
+          }
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("生成状況の取得に失敗しました");
+      }
+
+      const data = await response.json();
+
+      console.log(
+        `AIクエスト生成状況: ${data.generated_tasks}/${data.total_tasks}`
+      );
+
+      if (data.completed) {
+        window.location.reload();
+      }
+
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // 2秒ごとに生成状況だけ確認
+  setInterval(checkGenerationStatus, 2000);
+</script>
+
+<% else %>
+
+  <% @today_tasks.each do |task| %>
+    <details class="card mb-3">
+
+      <summary class="card-header">
+        <% if task.completed %>
+          ✅
+        <% else %>
+          ☐
+        <% end %>
+
+        <%= task.title %>
+        （<%= task.exp %> EXP）
+      </summary>
+
+      <div class="card-body">
+        <%= simple_format(task.description) %>
+
+        <% unless task.completed %>
+          <%= button_to "達成する",
+            complete_ai_plan_ai_task_path(@ai_plan, task),
+            method: :patch,
+            class: "btn btn-success" %>
+        <% end %>
+      </div>
+
+    </details>
+  <% end %>
+
 <% end %>

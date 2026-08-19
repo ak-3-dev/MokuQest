@@ -24,6 +24,10 @@ Rails.application.routes.draw do
   end
 
   resources :ai_plans do
+    member do
+      get :status
+    end
+    
     resources :ai_tasks, only: [] do
       member do
         patch :complete

@@ -18,27 +18,9 @@ class AiPlansController < ApplicationController
       )
     )
 
-    tasks = OpenaiService.generate_quest(
-      @ai_plan.goal,
-      @ai_plan.period,
-      @ai_plan.level
-    )
+    GenerateAiQuestJob.perform_later(@ai_plan.id)
 
-    tasks["days"].each do |day_data|
-      day_data["tasks"].each do |task|
-
-        @ai_plan.ai_tasks.create!(
-          title: task["title"],
-          description: task["description"],
-          exp: task["exp"],
-          completed: false,
-          day: day_data["day"]
-        )
-      end
-    end
-
-    redirect_to user_path(current_user),
-                notice: "AIクエストを受注しました!"
+    redirect_to ai_plan_path(@ai_plan)
   end
 
   def show
@@ -51,6 +33,19 @@ class AiPlansController < ApplicationController
     @today_tasks = @ai_plan.ai_tasks.where(
       day: @ai_plan.current_day
     )
+  end
+
+  def status
+    @ai_plan = current_user.ai_plans.find(params[:id])
+
+    total_tasks = @ai_plan.period.to_i * 3
+    generated_tasks = @ai_plan.ai_tasks.count
+
+    render json: {
+      completed: generated_tasks >= total_tasks,
+      generated_tasks: generated_tasks,
+      total_tasks: total_tasks
+    }
   end
 
   private
