@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_07_11_065316) do
+ActiveRecord::Schema[8.0].define(version: 2026_08_26_071107) do
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -34,6 +34,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_07_11_065316) do
     t.integer "quest_id"
     t.integer "current_day", default: 1
     t.date "started_on"
+    t.string "generation_status", default: "pending", null: false
     t.index ["quest_id"], name: "index_ai_plans_on_quest_id"
     t.index ["user_id"], name: "index_ai_plans_on_user_id"
   end

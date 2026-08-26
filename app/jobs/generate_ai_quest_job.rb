@@ -5,8 +5,9 @@ class GenerateAiQuestJob < ApplicationJob
 
   def perform(ai_plan_id)
     ai_plan = AiPlan.find(ai_plan_id)
-    period = ai_plan.period.to_i
+    ai_plan.update!(generation_status: "processing")
 
+    period = ai_plan.period.to_i
     start_day = 1
 
     while start_day <= period
@@ -37,5 +38,10 @@ class GenerateAiQuestJob < ApplicationJob
 
       start_day = end_day + 1
     end
+
+    ai_plan.update!(generation_status: "completed")
+  rescue => e
+    ai_plan&.update!(generation_status: "failed")
+    raise e
   end
 end

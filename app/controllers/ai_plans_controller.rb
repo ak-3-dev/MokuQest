@@ -44,7 +44,8 @@ class AiPlansController < ApplicationController
     render json: {
       completed: generated_tasks >= total_tasks,
       generated_tasks: generated_tasks,
-      total_tasks: total_tasks
+      total_tasks: total_tasks,
+      generation_status: @ai_plan.generation_status
     }
   end
 
