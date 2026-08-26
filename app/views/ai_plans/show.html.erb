@@ -29,6 +29,25 @@
     <p class="text-muted">
       しばらくお待ちください...
     </p>
+
+    <div class="progress mt-4"
+     role="progressbar"
+     aria-label="AIクエスト生成進捗"
+     aria-valuemin="0"
+     aria-valuemax="100"
+     style="height: 24px;">
+
+      <div id="generation-progress-bar"
+          class="progress-bar progress-bar-striped progress-bar-animated bg-warning text-dark fw-bold"
+          style="width: 0%;">
+        0%
+      </div>
+    </div>
+
+    <p id="generation-progress-text"
+      class="mt-2 text-muted">
+      0 / <%= @ai_plan.period.to_i %> 日分のクエストを生成中...
+    </p>
   </div>
 
   <script>
@@ -45,11 +64,11 @@
   let messageIndex = 0;
   const messageElement = document.getElementById("loading-message");
 
-  // 1.5秒ごとにメッセージを変更
+  // 2秒ごとにメッセージを変更
   setInterval(() => {
     messageIndex = (messageIndex + 1) % messages.length;
     messageElement.textContent = messages[messageIndex];
-  }, 1500);
+  }, 2000);
 
   // AIクエストの生成状況を確認
   const checkGenerationStatus = async () => {
@@ -73,8 +92,30 @@
         `AIクエスト生成状況: ${data.generated_tasks}/${data.total_tasks}`
       );
 
+      const progressBar = document.getElementById("generation-progress-bar");
+      const progressText = document.getElementById("generation-progress-text");
+
+      const percentage =
+        data.total_tasks > 0
+          ? Math.round((data.generated_tasks / data.total_tasks) * 100)
+          : 0;
+
+      const generatedDays = Math.floor(data.generated_tasks / 3);
+      const totalDays = Math.floor(data.total_tasks / 3);
+
+      progressBar.style.width = `${percentage}%`;
+      progressBar.textContent = `${percentage}%`;
+      progressBar.setAttribute("aria-valuenow", percentage);
+
+      progressText.textContent =
+        `${generatedDays} / ${totalDays} 日分のクエストを生成中...`;
+
       if (data.completed) {
-        window.location.reload();
+        progressText.textContent = "🎉 冒険の準備が完了しました！";
+
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
       }
 
     } catch (error) {
