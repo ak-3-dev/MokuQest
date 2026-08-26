@@ -23,6 +23,10 @@
     <p style="color: rgba(255, 255, 255, 0.8);">
       もう一度クエストを生成してください。
     </p>
+
+    <%= link_to "🔄 もう一度クエストを生成する",
+                new_ai_plan_path,
+                class: "btn btn-warning fw-bold mt-3" %>
   </div>
 
 <% elsif @ai_plan.ai_tasks.empty? %>
