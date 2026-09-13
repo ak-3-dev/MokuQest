@@ -27,8 +27,12 @@
                   </span>
                 </div>
                 
-                <p class="card-text text-muted small mb-0">
+                <p class="card-text text-muted small mb-1">
                   <%= truncate(quest.body, length: 80) %>
+                </p>
+
+                <p class="text-muted small mb-0">
+                  投稿日:<%= quest.created_at.strftime("%Y年%m月%d日 %H:%M") %>
                 </p>
               </div>
               
@@ -39,6 +43,11 @@
             </div>
           </div>
         <% end %>
+
+        <div class="d-flex justify-content-center mt-4">
+          <%= paginate @quests %>
+        </div>
+
       <% else %>
         <div class="text-center py-5">
           <p class="text-muted fs-5">現在受注されているクエストはありません。</p>

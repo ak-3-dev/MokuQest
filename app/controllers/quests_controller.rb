@@ -3,7 +3,7 @@ class QuestsController < ApplicationController
   before_action :ensure_correct_user, only: [:edit, :update, :destroy]
 
   def index
-    @quests = Quest.all.order(created_at: :desc)
+    @quests = Quest.order(created_at: :desc).page(params[:page]).per(10)
   end
 
   def new

@@ -34,3 +34,6 @@
 /config/master.key
 
 /.env
+
+# Ignore locally installed gems.
+/vendor/bundle

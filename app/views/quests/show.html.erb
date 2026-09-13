@@ -82,6 +82,10 @@
           </p>
           <p class="mb-2"><%= comment.comment %></p>
 
+          <p class="text-muted small mb-2">
+            投稿日:<%= comment.created_at.strftime("%Y年%m月%d日 %H:%M") %>
+          </p>
+
           <% if comment.user == current_user %>
             <div class="mt-2">
               <%= button_to "クエスト（コメント）取り消し", quest_comment_path(@quest, comment), method: :delete, onclick: "return confirm('本当に削除しますか？');", data: { turbo: false }, class: "btn btn-sm btn-outline-danger" %>
