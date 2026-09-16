@@ -3,7 +3,7 @@ class AiTasksController < ApplicationController
     @task = AiTask.find(params[:id])
 
     @task.update!(completed: true)
-    
+
     current_user.increment!(
       :exp,
       @task.exp

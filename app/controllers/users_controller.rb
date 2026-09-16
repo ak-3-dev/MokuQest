@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update]
-  before_action :ensure_correct_user, only: [:edit, :update]
+  before_action :set_user, only: [ :show, :edit, :update ]
+  before_action :ensure_correct_user, only: [ :edit, :update ]
 
   def show
     @quests = @user.quests.order(created_at: :desc)

@@ -1,7 +1,7 @@
 class QuestsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_quest, only: [:show, :edit, :update, :destroy]
-  before_action :ensure_correct_user, only: [:edit, :update, :destroy]
+  before_action :set_quest, only: [ :show, :edit, :update, :destroy ]
+  before_action :ensure_correct_user, only: [ :edit, :update, :destroy ]
 
   def index
     @quests = Quest.order(created_at: :desc).page(params[:page]).per(10)

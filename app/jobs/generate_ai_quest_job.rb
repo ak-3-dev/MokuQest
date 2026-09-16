@@ -11,7 +11,7 @@ class GenerateAiQuestJob < ApplicationJob
     start_day = 1
 
     while start_day <= period
-      end_day = [start_day + BATCH_DAYS - 1, period].min
+      end_day = [ start_day + BATCH_DAYS - 1, period ].min
 
       previous_tasks = ai_plan.ai_tasks.order(:day)
 

@@ -11,7 +11,7 @@ class Group < ApplicationRecord
            source: :user
 
   validates :name, presence: true
-  validates :description,presence: true
+  validates :description, presence: true
   validates :rules, presence: true
 
   def self.search(keyword)

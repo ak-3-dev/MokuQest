@@ -2,9 +2,9 @@ Rails.application.routes.draw do
   devise_for :admins, path: :admin
   namespace :admin do
     get "comments/index"
-    resources :users, only: [:index, :show, :destroy]
-    resources :groups, only: [:index, :destroy]
-    resources :comments, only: [:index, :destroy]
+    resources :users, only: [ :index, :show, :destroy ]
+    resources :groups, only: [ :index, :destroy ]
+    resources :comments, only: [ :index, :destroy ]
   end
   get "searches/search"
   devise_for :users, controllers: {
@@ -13,21 +13,21 @@ Rails.application.routes.draw do
   root to: "homes#top"
   get "about" => "homes#about", as: "about"
   get "search" => "searches#search", as: "search"
-  resources :users, only: [:show]
+  resources :users, only: [ :show ]
   resources :quests do
-    resources :comments, only: [:create, :destroy]
+    resources :comments, only: [ :create, :destroy ]
   end
 
   # config/routes.rb
   resources :groups do
-    resources :group_requests,only: [:create, :index, :update, :destroy]
+    resources :group_requests, only: [ :create, :index, :update, :destroy ]
   end
 
   resources :ai_plans do
     member do
       get :status
     end
-    
+
     resources :ai_tasks, only: [] do
       member do
         patch :complete

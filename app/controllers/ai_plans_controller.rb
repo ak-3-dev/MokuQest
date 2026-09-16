@@ -29,14 +29,14 @@ class AiPlansController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
-  
+
   def show
     @ai_plan = AiPlan.find(params[:id])
 
     unless @ai_plan.user == current_user
       redirect_to quests_path, alert: "閲覧できません。" and return
     end
-    
+
     @today_tasks = @ai_plan.ai_tasks.where(
       day: @ai_plan.current_day
     )

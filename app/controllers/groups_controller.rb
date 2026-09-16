@@ -19,7 +19,7 @@ class GroupsController < ApplicationController
         user: current_user,
         status: :approved
       )
-      
+
       redirect_to groups_path, notice: "グループを作成しました。"
     else
       render :new, status: :unprocessable_entity
