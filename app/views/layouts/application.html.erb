@@ -71,6 +71,20 @@
       </nav> 
     </header>
 
+    <div class="container mt-3">
+      <% if notice.present? %>
+        <div class="alert alert-success" role="alert">
+          <%= notice %>
+        </div>
+      <% end %>
+
+      <% if alert.present? %>
+        <div class="alert alert-danger" role="alert">
+          <%= alert %>
+        </div>
+      <% end %>
+    </div>
+
     <% if user_signed_in? %>
       <%= form_with url: search_path, method: :get, class: "search-form" do |f| %>
         <%= f.text_field :keyword, value: @keyword, placeholder: "検索ワードを入力" %>

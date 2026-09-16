@@ -1,0 +1,36 @@
+ja:
+  errors:
+    format: "%{attribute}%{message}"
+    messages:
+      blank: "を入力してください"
+      taken: "はすでに使用されています"
+      invalid: "は不正な値です"
+      confirmation: "と%{attribute}の入力が一致しません"
+      too_short: "は%{count}文字以上で入力してください"
+      too_long: "は%{count}文字以内で入力してください"
+      wrong_length: "は%{count}文字で入力してください"
+      not_a_number: "は数値で入力してください"
+      greater_than: "は%{count}より大きい値にしてください"
+      greater_than_or_equal_to: "は%{count}以上の値にしてください"
+      less_than: "は%{count}より小さい値にしてください"
+      less_than_or_equal_to: "は%{count}以下の値にしてください"
+
+  activerecord:
+    attributes:
+      user:
+        name: "名前"
+        email: "メールアドレス"
+        password: "パスワード"
+        password_confirmation: "パスワード（確認）"
+
+      quest:
+        title: "タイトル"
+        body: "内容"
+
+      comment:
+        comment: "コメント"
+
+      ai_plan:
+        goal: "達成したい目標"
+        period: "期間"
+        level: "現在のレベル"

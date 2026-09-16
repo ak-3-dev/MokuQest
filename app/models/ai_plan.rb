@@ -4,6 +4,10 @@ class AiPlan < ApplicationRecord
 
   has_many :ai_tasks, dependent: :destroy
 
+  validates :goal, presence: true
+  validates :period, presence: true
+  validates :level, presence: true
+
   def completed_days_count
     ai_tasks
       .group(:day)
