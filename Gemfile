@@ -63,13 +63,14 @@ group :test do
 end
 
 gem "devise"
+gem "devise-i18n"
 
 
-gem 'ruby-openai'
-gem 'dotenv-rails', groups: [:development, :test]
+gem "ruby-openai"
+gem "dotenv-rails", groups: [ :development, :test ]
 
 group :production do
   gem "mysql2"
 end
 
-
+gem "kaminari", "~> 1.2.1"

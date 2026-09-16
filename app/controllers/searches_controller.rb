@@ -15,9 +15,9 @@ class SearchesController < ApplicationController
 
     if @range == "user"
       if @search_method == "perfect"
-        @results = User.where(name: @keyword) 
+        @results = User.where(name: @keyword)
       elsif @search_method == "partial"
-        @results = User.where("name LIKE ?", "%#{@keyword}%") 
+        @results = User.where("name LIKE ?", "%#{@keyword}%")
       end
     elsif @range == "quest"
       if @search_method == "perfect"

@@ -1,3 +1,17 @@
+<% if @ai_plan.errors.any? %>
+  <div class="alert alert-danger container mb-4">
+    <h5 class="fw-bold">
+      ⚠️ <%= @ai_plan.errors.count %>件のエラーがあります
+    </h5>
+
+    <ul class="mb-0">
+      <% @ai_plan.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <h2 class="fw-bold text-center mb-5"
     style="color:#ffc107;
            text-shadow:2px 2px 6px rgba(0,0,0,.8);

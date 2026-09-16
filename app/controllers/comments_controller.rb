@@ -9,7 +9,7 @@ class CommentsController < ApplicationController
       redirect_to quest_path(@quest), alert: "コメントの投稿に失敗しました"
     end
   end
-  
+
   def destroy
     @comment = current_user.comments.find(params[:id])
     @comment.destroy

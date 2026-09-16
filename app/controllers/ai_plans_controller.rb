@@ -4,12 +4,12 @@ class AiPlansController < ApplicationController
   end
 
   def create
-    @quest = current_user.quests.create!(
+    @quest = current_user.quests.build(
       title: ai_plan_params[:goal],
       body: "#{ai_plan_params[:goal]}を達成するためのAIクエスト"
     )
 
-    @ai_plan = current_user.ai_plans.create!(
+    @ai_plan = current_user.ai_plans.build(
       ai_plan_params.merge(
         plan_date: Date.current,
         started_on: Date.current,
@@ -18,9 +18,16 @@ class AiPlansController < ApplicationController
       )
     )
 
-    GenerateAiQuestJob.perform_later(@ai_plan.id)
+    if @ai_plan.valid?
+      @quest.save!
+      @ai_plan.save!
 
-    redirect_to ai_plan_path(@ai_plan)
+      GenerateAiQuestJob.perform_later(@ai_plan.id)
+
+      redirect_to ai_plan_path(@ai_plan)
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def show
@@ -29,7 +36,7 @@ class AiPlansController < ApplicationController
     unless @ai_plan.user == current_user
       redirect_to quests_path, alert: "閲覧できません。" and return
     end
-    
+
     @today_tasks = @ai_plan.ai_tasks.where(
       day: @ai_plan.current_day
     )

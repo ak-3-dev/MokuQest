@@ -1,9 +1,10 @@
 class QuestsController < ApplicationController
   before_action :authenticate_user!
-  before_action :ensure_correct_user, only: [:edit, :update, :destroy]
+  before_action :set_quest, only: [ :show, :edit, :update, :destroy ]
+  before_action :ensure_correct_user, only: [ :edit, :update, :destroy ]
 
   def index
-    @quests = Quest.all.order(created_at: :desc)
+    @quests = Quest.order(created_at: :desc).page(params[:page]).per(10)
   end
 
   def new
@@ -21,7 +22,6 @@ class QuestsController < ApplicationController
   end
 
   def show
-    @quest = Quest.find(params[:id])
     @ai_plan = @quest.ai_plan
 
     if @ai_plan.present?
@@ -32,11 +32,9 @@ class QuestsController < ApplicationController
   end
 
   def edit
-    @quest = Quest.find(params[:id])
   end
 
   def update
-    @quest = Quest.find(params[:id])
     if @quest.update(quest_params)
       redirect_to quest_path(@quest), notice: "クエスト「#{@quest.title}」の作戦を変更しました！"
     else
@@ -45,19 +43,21 @@ class QuestsController < ApplicationController
   end
 
   def destroy
-    @quest = Quest.find(params[:id])
     @quest.destroy
     redirect_to quests_path, notice: "クエスト「#{@quest.title}」を取り消しました"
   end
 
   private
 
+  def set_quest
+    @quest = Quest.find(params[:id])
+  end
+
   def quest_params
     params.require(:quest).permit(:title, :body, :status)
   end
 
   def ensure_correct_user
-    @quest = Quest.find(params[:id])
     if @quest.user != current_user
       redirect_to quests_path, alert: "他人のクエストを操作する権限がありません。"
     end
