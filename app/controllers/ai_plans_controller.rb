@@ -37,9 +37,14 @@ class AiPlansController < ApplicationController
       redirect_to quests_path, alert: "閲覧できません。" and return
     end
 
-    @today_tasks = @ai_plan.ai_tasks.where(
-      day: @ai_plan.current_day
-    )
+    today_day = (Date.current - @ai_plan.started_on).to_i + 1
+
+    @today_tasks =
+      if today_day.between?(1, @ai_plan.period.to_i)
+        @ai_plan.ai_tasks.where(day: today_day)
+      else
+        @ai_plan.ai_tasks.none
+      end
   end
 
   def status
