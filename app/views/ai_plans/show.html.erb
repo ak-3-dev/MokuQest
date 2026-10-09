@@ -174,32 +174,91 @@
 
   <% else %>
 
-  <% @today_tasks.each do |task| %>
-    <details class="card mb-3">
+    <% if @quest_cleared %>
 
-      <summary class="card-header">
-        <% if task.completed %>
-          ✅
-        <% else %>
-          ☐
-        <% end %>
+      <div class="card shadow border-warning text-center mt-4">
+        <div class="card-body py-5">
+          <h2 class="fw-bold text-warning mb-4">
+            🏆 QUEST CLEAR!
+          </h2>
 
-        <%= task.title %>
-        （<%= task.exp %> EXP）
-      </summary>
+          <p>
+            すべてのミッションを達成しました！
+          </p>
 
-      <div class="card-body">
-        <%= simple_format(task.description) %>
-
-        <% unless task.completed %>
-          <%= button_to "達成する",
-            complete_ai_plan_ai_task_path(@ai_plan, task),
-            method: :patch,
-            class: "btn btn-success" %>
-        <% end %>
+          <%= link_to "新しいAIクエストを受注する",
+              new_ai_plan_path,
+              class: "btn btn-warning fw-bold mt-3" %>
+        </div>
       </div>
 
-    </details>
-  <% end %>
+    <% elsif @period_ended %>
 
-<% end %>
+      <div class="text-center mb-4">
+        <h3 class="fw-bold text-warning">
+          ⌛ クエスト期間終了
+        </h3>
+        <p class="text-white">
+          未達成のミッションをクリアして、クエスト完全達成を目指そう！
+        </p>
+      </div>
+
+      <% @incomplete_tasks.group_by(&:day).each do |day, tasks| %>
+
+        <h5 class="fw-bold text-warning mt-4 mb-3">
+          📅 Day <%= day %>
+        </h5>
+
+        <% tasks.each do |task| %>
+          <details class="card mb-3">
+            <summary class="card-header">
+              ☐ <%= task.title %>
+              （<%= task.exp %> EXP）
+            </summary>
+
+            <div class="card-body">
+              <%= simple_format(task.description) %>
+
+              <%= button_to "達成する",
+                  complete_ai_plan_ai_task_path(@ai_plan, task),
+                  method: :patch,
+                  class: "btn btn-success" %>
+            </div>
+          </details>
+        <% end %>
+
+      <% end %>
+
+    <% else %>
+
+      <% @today_tasks.each do |task| %>
+        <details class="card mb-3">
+
+          <summary class="card-header">
+            <% if task.completed %>
+              ✅
+            <% else %>
+              ☐
+            <% end %>
+
+            <%= task.title %>
+            （<%= task.exp %> EXP）
+          </summary>
+
+          <div class="card-body">
+            <%= simple_format(task.description) %>
+
+            <% unless task.completed %>
+              <%= button_to "達成する",
+                  complete_ai_plan_ai_task_path(@ai_plan, task),
+                  method: :patch,
+                  class: "btn btn-success" %>
+            <% end %>
+          </div>
+
+        </details>
+      <% end %>
+
+    <% end %>
+
+  <% end %>

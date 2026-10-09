@@ -31,20 +31,31 @@ class AiPlansController < ApplicationController
   end
 
   def show
-    @ai_plan = AiPlan.find(params[:id])
-
-    unless @ai_plan.user == current_user
-      redirect_to quests_path, alert: "閲覧できません。" and return
-    end
+    @ai_plan = current_user.ai_plans.find(params[:id])
 
     today_day = (Date.current - @ai_plan.started_on).to_i + 1
+    total_days = @ai_plan.period.to_i
+
+    @period_ended = today_day > total_days
 
     @today_tasks =
-      if today_day.between?(1, @ai_plan.period.to_i)
+      if today_day.between?(1, total_days)
         @ai_plan.ai_tasks.where(day: today_day)
       else
         @ai_plan.ai_tasks.none
       end
+
+    @incomplete_tasks = @ai_plan.ai_tasks
+                                .where(completed: false)
+                                .where("day < ?", today_day)
+                                .order(:day, :id)
+
+    expected_tasks = total_days * 3
+
+    @quest_cleared =
+      expected_tasks.positive? &&
+      @ai_plan.ai_tasks.count == expected_tasks &&
+      !@ai_plan.ai_tasks.exists?(completed: false)
   end
 
   def status
