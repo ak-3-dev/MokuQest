@@ -4,28 +4,39 @@ class UsersController < ApplicationController
 
   def show
     @quests = @user.quests.order(created_at: :desc)
-    @ai_plan = @user.ai_plans
-                    .where(plan_date: Date.current)
-                    .order(created_at: :desc)
-                    .first
-    if @ai_plan.present?
 
-      today_day =
+    @ai_plan = @user.ai_plans
+                    .where("started_on <= ?", Date.current)
+                    .order(started_on: :desc, created_at: :desc)
+                    .first
+
+    if @ai_plan.present?
+      @today_day =
         (Date.current - @ai_plan.started_on).to_i + 1
 
-      @plan_completed =
-        today_day > @ai_plan.period.to_i
-
-      @today_tasks =
-        @ai_plan.ai_tasks.where(day: today_day)
-
-      @today_day = today_day
       @total_days = @ai_plan.period.to_i
 
-      @plan_progress =
-        ((@today_day.to_f / @total_days) * 100).round
+      @today_tasks =
+        if @today_day.between?(1, @total_days)
+          @ai_plan.ai_tasks.where(day: @today_day)
+        else
+          @ai_plan.ai_tasks.none
+        end
 
-      @plan_progress = 100 if @plan_progress > 100
+      @past_incomplete_tasks =
+        @ai_plan.ai_tasks
+                .where("day < ?", @today_day)
+                .where(completed: false)
+                .order(:day, :id)
+
+      expected_tasks = @total_days * 3
+
+      @plan_completed =
+        expected_tasks.positive? &&
+        @ai_plan.ai_tasks.count == expected_tasks &&
+        !@ai_plan.ai_tasks.exists?(completed: false)
+      @plan_progress =
+        [(@today_day.to_f / @total_days * 100).round, 100].min
 
       @completed_tasks = @today_tasks.where(completed: true).count
       @total_tasks = @today_tasks.count
